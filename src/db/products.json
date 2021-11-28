@@ -1,0 +1,27 @@
+{
+    "headers": ["No", "name", "price", "stock", "category", "Option"],
+    "rows": [
+      {
+        "id": "222",
+        "name": "Jaket",
+        "price": 200000,
+        "stock": 200,
+        "category": "pakaian"
+      },
+      {
+        "id": "1",
+        "name": "Celana",
+        "price": 200000,
+        "stock": 200,
+        "category": "pakaian"
+      },
+      {
+        "id": "23",
+        "name": "Baju",
+        "price": 200000,
+        "stock": 200,
+        "category": "pakaian"
+      }
+    ]
+  }
+  
