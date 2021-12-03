@@ -18,13 +18,15 @@ const initialFormValue = {
   category: ""
 }
 
-const FormEdit = ({ data, setOpen, editedDataId }) => {
+const FormEdit = ({ data, setOpen, editedDataId, setData }) => {
   const [form, setForm] = useState(initialFormValue);
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    data.map((row, index) => (
+    
+    const editedData = data.map((row, index) => (
       row.id === editedDataId ? data[index] = form : { ...row }))
+    setData(prev => ({...prev, data:editedData}))
     setOpen(false)
   }
 

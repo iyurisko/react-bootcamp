@@ -41,6 +41,7 @@ const FormInput = ({ data, setOpen }) => {
                 Price
               </Label>
               <Input
+                type="number"
                 value={form.price}
                 onChange={(e) => setForm(prev => ({
                   ...prev,
@@ -54,6 +55,7 @@ const FormInput = ({ data, setOpen }) => {
                 Stock
               </Label>
               <Input
+                type="number"
                 value={form.stock}
                 onChange={(e) => setForm(prev => ({
                   ...prev,
