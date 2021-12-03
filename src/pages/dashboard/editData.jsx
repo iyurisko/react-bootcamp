@@ -18,13 +18,15 @@ const initialFormValue = {
   category: ""
 }
 
-const FormEdit = ({ data, setOpen, editedDataId }) => {
+const FormEdit = ({ data, setOpen, editedDataId, setData }) => {
   const [form, setForm] = useState(initialFormValue);
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    data.map((row, index) => (
+    
+    const editedData = data.map((row, index) => (
       row.id === editedDataId ? data[index] = form : { ...row }))
+    setData(prev => ({...prev, data:editedData}))
     setOpen(false)
   }
 
@@ -115,105 +117,5 @@ const FormEdit = ({ data, setOpen, editedDataId }) => {
     </>
   )
 }
-
-
-
-// import { Button, Row, Col, Input, Table, FormGroup, Label, Form, FormFeedback } from 'reactstrap';
-// import { useState, useEffect } from "react";
-// const FormInput = () => {
-//   const initialFormValue = {
-//     name: "",
-//     price: "",
-//     stock: "",
-//     category: ""
-//   }
-
-
-//   const validation = {
-//     regex: {
-//       name: /^\S+@\S+\.\S+$/,
-//       price: /^\S+@\S+\.\S+$/,
-//       stock: /^\S+@\S+\.\S+$/,
-//       category: /^\S+@\S+\.\S+$/
-//     },
-//     message: {
-//       name: "ss",
-//       price: "null",
-//       stock: "null",
-//       category: ""
-//     }
-//   }
-
-//   const [validated, setValidated] = useState(false);
-//   const validationField = (key, input) => {
-//     let inputField = input || ""
-//     if (inputField.match(validation.regex[key]) === null) {
-//       return { error: true, msg: validation.message[key] }
-//     } else {
-//       return { error: false, msg: "" }
-//     }
-//   }
-
-//   const [form, setForm] = useState(initialFormValue)
-//   const handleSubmit = (e) => {
-//     e.preventDefault()
-//     setValidated(true)
-//     // console.log("ok", validationField())
-//   }
-//   const handleCancel = () => {
-
-//   }
-
-
-
-//   return (
-//     <>
-//       <Row>
-//         <Form
-//           noValidate={true}
-//           onSubmit={handleSubmit}
-//           validated={validated.toString()}
-//         >
-//           {Object.keys(form).map((key) => (
-//             <FormGroup key={key}>
-//               <Label>
-//                 {key}
-//               </Label>
-//               <Input
-//                 value={form[key]}
-//                 onChange={(e) => {
-//                   setForm(prev => ({
-//                     ...prev,
-//                     [key]: e.target.value
-//                   }))
-
-//                 }}
-
-//                 invalid={validated && validationField(key, form[key]).error ? true : undefined}
-//               />
-//               <FormFeedback invalid={validated && validationField(key, form[key]).error ? true : undefined} > {validationField(key, form[key]).msg} </FormFeedback>
-//             </FormGroup>
-
-//           ))}
-
-//           <Row>
-//             <Col>
-//               <Button type="submit">Submit</Button>
-//             </Col>
-//             <Col>
-//               Cancel
-//             </Col>
-//           </Row>
-
-//         </Form>
-
-
-//       </Row>
-
-
-
-//     </>
-//   )
-// }
 
 export default FormEdit
