@@ -62,6 +62,7 @@ const FormEdit = ({ data, setOpen, editedDataId, setData }) => {
                 Price
               </Label>
               <Input
+                type="number"
                 value={form.price}
                 onChange={(e) => setForm(prev => ({
                   ...prev,
@@ -77,6 +78,7 @@ const FormEdit = ({ data, setOpen, editedDataId, setData }) => {
                 Stock
               </Label>
               <Input
+                type="number"
                 value={form.stock}
                 onChange={(e) => setForm(prev => ({
                   ...prev,
