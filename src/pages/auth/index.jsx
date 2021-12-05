@@ -26,7 +26,7 @@ const AuthPages = () => {
                   currentContainer ?
                     <div className={`card-register `}>
                       <h3>Sign up</h3>
-                      <Signup />
+                      <Signup setCurrentContainer={setCurrentContainer} />
                       <a href="!#" onClick={() => setCurrentContainer(false)}> Already have account?</a>
                     </div> :
                     <div className={`card-login`}>
@@ -39,8 +39,6 @@ const AuthPages = () => {
           </div>
         </Col>
       </Row>
-
-
     </div>
   )
 }

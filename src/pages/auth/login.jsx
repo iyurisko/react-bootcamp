@@ -1,18 +1,25 @@
-import { React } from 'react'
+import { React , useEffect } from 'react'
 import { Button, Container, FormFeedback, Input } from 'reactstrap'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+import axios from 'axios'
 
 const validationSchema = yup.object().shape({
-  email: yup.string().email().required(),
+  email: yup.string().email().required("Email salah"),
   password: yup.string().min(8).required(),
 });
 
 const Login = () => {
 
   const handleLogin = async (e) => {
-    alert("oke")
-    console.log(e);
+   const { email, password} = formik.values
+    let { data } = await axios.get(`http://localhost:3002/data`)
+    let user = data.filter(v => v.email === email && v.password === password)
+  
+    if (user.length > 0) {
+        sessionStorage.setItem('logged', true)
+        window.location = '/main'
+    }
   }
 
   const formik = useFormik({
@@ -24,8 +31,12 @@ const Login = () => {
     onSubmit: () => handleLogin()
   });
 
-
-
+  // useEffect(() => {
+  //   let isAuth = sessionStorage.getItem('logged')
+  //   if (isAuth) {
+  //     props.history.push('/home')
+  //   }
+  // }, [props.history])
 
 
   return (
@@ -33,7 +44,7 @@ const Login = () => {
       <form onSubmit={formik.handleSubmit}>
         {
           Object.keys(formik.initialValues).map((key, index) => (
-            <div className="row-input">
+            <div key={index} className="row-input">
               <Input
                 id={key}
                 name={key}
@@ -42,6 +53,7 @@ const Login = () => {
                 onChange={formik.handleChange}
                 invalid={formik.touched[key] && Boolean(formik.errors[key])}
               />
+
               {
                 formik.touched[key] && Boolean(formik.errors[key]) &&
                 <FormFeedback className="error-feedback">{formik.errors[key]}</FormFeedback>
@@ -54,7 +66,6 @@ const Login = () => {
           Login
         </Button>
       </form>
-
     </Container >
   )
 }

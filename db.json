@@ -1,0 +1,49 @@
+{
+  "data": {
+    "3": {
+      "id": 393118336232.49817,
+      "name": "klk sds",
+      "price": "787",
+      "stock": "8787",
+      "category": "hjhjh"
+    },
+    "headers": [
+      "No",
+      "name",
+      "price",
+      "stock",
+      "category",
+      "Option"
+    ],
+    "rows": [
+      {
+        "id": "222",
+        "name": "Jaket hitam",
+        "price": 200000,
+        "stock": 200,
+        "category": "pakaian"
+      },
+      {
+        "id": "1",
+        "name": "Celana",
+        "price": 200000,
+        "stock": 200,
+        "category": "pakaian"
+      },
+      {
+        "id": "23",
+        "name": "Baju",
+        "price": 200000,
+        "stock": 200,
+        "category": "pakaian"
+      },
+      {
+        "id": 393118336232.49817,
+        "name": "klk sds",
+        "price": "787",
+        "stock": "8787",
+        "category": "hjhjh"
+      }
+    ]
+  }
+}

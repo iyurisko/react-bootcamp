@@ -11,12 +11,12 @@ const validationSchema = yup.object().shape({
   retypePassword: yup.string().min(8).required(),
 });
 
+const Register = ({setCurrentContainer}) => {
 
-const Register = () => {
-
-  const handleLogin = async (e) => {
-    alert("oke")
-    console.log(e);
+  const handleRegister = async (e) => {
+    const { email, password, username} = formik.values
+    // await axios.post(`http://localhost:3002/data`, { email, password,  username})
+    // setCurrentContainer(true)
   }
 
   const formik = useFormik({
@@ -27,10 +27,8 @@ const Register = () => {
       retypePassword: ''
     },
     validationSchema: validationSchema,
-    onSubmit: () => handleLogin()
+    onSubmit: () => handleRegister()
   });
-
-
 
 
   console.log(formik.initialValues)
