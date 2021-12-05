@@ -27,7 +27,7 @@ const Dashboard = () => {
       await axios.post(`http://localhost:3001/data`, (data))
       setData(prev=> ({...prev, rows: updatedRows}))
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -94,7 +94,6 @@ const Dashboard = () => {
           <FormCreate
             setData={setData}
             data={data}
-            setData={setData}
             setOpen={setIsCreateModalOpen}
           />
         }

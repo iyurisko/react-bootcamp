@@ -18,7 +18,7 @@
     "rows": [
       {
         "id": "222",
-        "name": "Jaket hitam",
+        "name": "Jaket",
         "price": 200000,
         "stock": 200,
         "category": "pakaian"
