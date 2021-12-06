@@ -1,21 +1,35 @@
-import { Button, Row, Col, Input, FormGroup, Label, Form } from 'reactstrap';
-import { useState } from "react";
+import {
+  Button,
+  Row,
+  Col,
+  Input,
+  FormGroup,
+  Label,
+  Form
+} from 'reactstrap';
+import React, { useState } from "react";
+import { createProducts } from '../../service/product';
 
 const initialFormValue = {
   id: Math.random() * Date.now(),
   name: "",
-  price: "",
-  stock: "",
+  price: 0,
+  stock: 0,
   category: ""
 }
 
-const FormInput = ({ data, setOpen }) => {
-  const [form, setForm] = useState(initialFormValue)
+const FormInput = ({ data, setOpen,setData }) => {
+  const [form, setForm] = useState(initialFormValue);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    data.push(form);
-    setOpen(false);
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const { code, msg, products } = await createProducts(data, form)
+    if (code === 200) {
+      setData(products)
+      setOpen(false);
+    } else {
+      alert(msg)
+    }
   }
 
   return (
@@ -24,9 +38,7 @@ const FormInput = ({ data, setOpen }) => {
         <Form onSubmit={handleSubmit}>
           <>
             <FormGroup>
-              <Label>
-                Name
-              </Label>
+              <Label>Name</Label>
               <Input
                 value={form.name}
                 onChange={(e) => setForm(prev => ({
@@ -37,10 +49,9 @@ const FormInput = ({ data, setOpen }) => {
               />
             </FormGroup>
             <FormGroup>
-              <Label>
-                Price
-              </Label>
+              <Label>Price</Label>
               <Input
+                type="number"
                 value={form.price}
                 onChange={(e) => setForm(prev => ({
                   ...prev,
@@ -50,10 +61,9 @@ const FormInput = ({ data, setOpen }) => {
               />
             </FormGroup>
             <FormGroup>
-              <Label>
-                Stock
-              </Label>
+              <Label>Stock</Label>
               <Input
+                type="number"
                 value={form.stock}
                 onChange={(e) => setForm(prev => ({
                   ...prev,
@@ -63,9 +73,7 @@ const FormInput = ({ data, setOpen }) => {
               />
             </FormGroup>
             <FormGroup>
-              <Label>
-                Category
-              </Label>
+              <Label>Category</Label>
               <Input
                 value={form.category}
                 onChange={(e) => setForm(prev => ({
@@ -78,10 +86,10 @@ const FormInput = ({ data, setOpen }) => {
           </>
           <Row>
             <Col>
-              <Button type="submit">Submit</Button>
+              <Button color="primary" type="submit"> Submit</Button>
             </Col>
             <Col>
-              <Button onClick={() => setOpen(false)}>Cancel</Button>
+              <Button onClick={() => setOpen(false)} > Cancel </Button>
             </Col>
           </Row>
         </Form>

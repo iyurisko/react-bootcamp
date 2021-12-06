@@ -1,57 +1,118 @@
-import { 
-  useState, 
-  useEffect } from "react";
-import { Button, 
-  Row, 
-  Col
- } from 'reactstrap';
+import React, {
+  useState,
+  useEffect
+} from "react";
+import {
+  Button,
+  Table
+} from 'reactstrap';
 import Modal from "../../component/Modal";
-import jsonData from "../../db/products.json"
 import FormCreate from "./createData";
-import Table from './table'
-
+import FormEdit from "./editData";
+import { deleteProducts, getProducts } from "../../service/product";
 
 
 const Dashboard = () => {
-  const [data, setData] = useState({ headers: [], rows: [] });
-  const [isCreateModalOpen, setCreateModalOpen] = useState(false);
 
-  useEffect(
-    () => {
-        setData(jsonData)          
-    }, []
-  )
+  const [data, setData] = useState({ headers: [], rows: [] });
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editedDataId, setEditedDataId] = useState({})
+
+  const handleDelete = async (id) => {
+
+    const { code, msg, products } = await deleteProducts(data, id)
+    if (code === 200) {
+      console.log({products})
+      setData(products)
+    } else {
+      alert(msg)
+    }
+  }
+
+  const handleEdit = (id) => {
+    setEditedDataId(id)
+    setIsEditModalOpen(true)
+  }
+
+  const getData = async () => {
+    const {code, products ,msg} = await getProducts()
+    if(code === 200 ){
+      setData(products)
+    }else{
+      alert(msg)
+    }
+  }
+
+  useEffect(() => {
+    getData()
+    // ... another func
+  }, [])
+
 
   return (
     <>
       <h1> CRUD DATA</h1>
       <br />
-      <Row>
-        <Col md={2}>
-          <Button color="primary" onClick={() => setCreateModalOpen(true)} > Create Data </Button>
-        </Col>
-      </Row>
-      <br />
-
-      {/* Table */}
-      <Table
-        setData={setData}
-        data={data}
-      />
-
-      {/* Modal Create Form */}
+      <Button color="primary" onClick={() => setIsCreateModalOpen(true)} > Add Data + </Button>
+      <br />  <br />
+      <Table>
+        <thead>
+          <tr>
+            {data.headers.map((header, idx) => (
+              <th key={idx}>{header} </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {data.rows.map((row, idx) => (
+            <tr key={idx}>
+              <th scope="row">
+                {idx + 1}
+              </th>
+              <td>{row.name}</td>
+              <td>{row.price}</td>
+              <td>{row.stock}</td>
+              <td>{row.category}</td>
+              <td>
+                <Button onClick={() => handleEdit(row.id)} > Edit</Button>
+              </td>
+              <td>
+                <Button color="danger" onClick={() => handleDelete(row.id)} > Delete</Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+      {/* Add data Modal */}
       <Modal
-        title={`Create Data`}
+        title={`Add Data`}
         isOpen={isCreateModalOpen}
-        setOpen={setCreateModalOpen}
+        setOpen={setIsCreateModalOpen}
         children={
           <FormCreate
             setData={setData}
-            data={data.rows}
-            setOpen={setCreateModalOpen}
+            data={data}
+            setOpen={setIsCreateModalOpen}
           />
         }
       />
+
+      {/* Edit data Modal */}
+      <Modal
+        title={`Edit Data`}
+        isOpen={isEditModalOpen}
+        setOpen={setIsEditModalOpen}
+        children={
+          <FormEdit
+            data={data}
+            setData={setData}
+            setOpen={setIsEditModalOpen}
+            editedDataId={editedDataId}
+          />
+        }
+      />
+
     </>
   )
 }

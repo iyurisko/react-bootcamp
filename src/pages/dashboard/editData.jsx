@@ -1,52 +1,52 @@
 import {
   Button,
-  Row, 
-  Col, 
-  Input, 
-  FormGroup, 
-  Label, 
-  Form, 
-  FormFeedback
+  Row,
+  Col,
+  Input,
+  FormGroup,
+  Label,
+  Form
 } from 'reactstrap';
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { editProducts } from '../../service/product';
 
 const initialFormValue = {
-  id: "",
+  id: Math.random * Date.now(),
   name: "",
-  price: "",
-  stock: "",
+  price: 0,
+  stock: 0,
   category: ""
 }
 
-const FormEdit = ({ data, setOpen, editedDataId }) => {
-  const [form, setForm] = useState(initialFormValue);
+const FormEdit = ({ data, setOpen, editedDataId, setData }) => {
+  const [form, setForm] = useState(initialFormValue)
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    data.map((row, index) => (
-      row.id === editedDataId ? data[index] = form : { ...row }))
-    setOpen(false)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(data)
+    const { code, msg, products } = await editProducts(data, form, editedDataId)
+    if (code === 200) {
+      setData(products)
+      setOpen(false)
+    } else {
+      alert(msg)
+    }
   }
 
   useEffect(() => {
-    const editedData = data.filter(v => v.id === editedDataId)[0]
+    const editedData = data.rows.filter((v) => v.id === editedDataId)[0]
     setForm(editedData)
-  }, [data, editedDataId])
+  },[data, editedDataId])
 
   return (
     <>
       <Row>
-        <Form
-          onSubmit={handleSubmit}
-        >
+        <Form onSubmit={handleSubmit}>
           <>
             <FormGroup>
-              <Label>
-                Name
-              </Label>
+              <Label>Name</Label>
               <Input
                 value={form.name}
-                type="text"
                 onChange={(e) => setForm(prev => ({
                   ...prev,
                   name: e.target.value
@@ -54,12 +54,10 @@ const FormEdit = ({ data, setOpen, editedDataId }) => {
                 required
               />
             </FormGroup>
-
             <FormGroup>
-              <Label>
-                Price
-              </Label>
+              <Label>Price</Label>
               <Input
+                type="number"
                 value={form.price}
                 onChange={(e) => setForm(prev => ({
                   ...prev,
@@ -67,14 +65,11 @@ const FormEdit = ({ data, setOpen, editedDataId }) => {
                 }))}
                 required
               />
-
             </FormGroup>
-
             <FormGroup>
-              <Label>
-                Stock
-              </Label>
+              <Label>Stock</Label>
               <Input
+                type="number"
                 value={form.stock}
                 onChange={(e) => setForm(prev => ({
                   ...prev,
@@ -82,15 +77,9 @@ const FormEdit = ({ data, setOpen, editedDataId }) => {
                 }))}
                 required
               />
-              <FormFeedback>
-
-              </FormFeedback>
             </FormGroup>
-
             <FormGroup>
-              <Label>
-                Category
-              </Label>
+              <Label>Category</Label>
               <Input
                 value={form.category}
                 onChange={(e) => setForm(prev => ({
@@ -101,13 +90,12 @@ const FormEdit = ({ data, setOpen, editedDataId }) => {
               />
             </FormGroup>
           </>
-
           <Row>
             <Col>
-              <Button type="submit">Submit</Button>
+              <Button color="primary" type="submit"> Submit</Button>
             </Col>
             <Col>
-              <Button onClick={() => setOpen(false)}>Cancel</Button>
+              <Button onClick={() => setOpen(false)} > Cancel </Button>
             </Col>
           </Row>
         </Form>
@@ -115,105 +103,5 @@ const FormEdit = ({ data, setOpen, editedDataId }) => {
     </>
   )
 }
-
-
-
-// import { Button, Row, Col, Input, Table, FormGroup, Label, Form, FormFeedback } from 'reactstrap';
-// import { useState, useEffect } from "react";
-// const FormInput = () => {
-//   const initialFormValue = {
-//     name: "",
-//     price: "",
-//     stock: "",
-//     category: ""
-//   }
-
-
-//   const validation = {
-//     regex: {
-//       name: /^\S+@\S+\.\S+$/,
-//       price: /^\S+@\S+\.\S+$/,
-//       stock: /^\S+@\S+\.\S+$/,
-//       category: /^\S+@\S+\.\S+$/
-//     },
-//     message: {
-//       name: "ss",
-//       price: "null",
-//       stock: "null",
-//       category: ""
-//     }
-//   }
-
-//   const [validated, setValidated] = useState(false);
-//   const validationField = (key, input) => {
-//     let inputField = input || ""
-//     if (inputField.match(validation.regex[key]) === null) {
-//       return { error: true, msg: validation.message[key] }
-//     } else {
-//       return { error: false, msg: "" }
-//     }
-//   }
-
-//   const [form, setForm] = useState(initialFormValue)
-//   const handleSubmit = (e) => {
-//     e.preventDefault()
-//     setValidated(true)
-//     // console.log("ok", validationField())
-//   }
-//   const handleCancel = () => {
-
-//   }
-
-
-
-//   return (
-//     <>
-//       <Row>
-//         <Form
-//           noValidate={true}
-//           onSubmit={handleSubmit}
-//           validated={validated.toString()}
-//         >
-//           {Object.keys(form).map((key) => (
-//             <FormGroup key={key}>
-//               <Label>
-//                 {key}
-//               </Label>
-//               <Input
-//                 value={form[key]}
-//                 onChange={(e) => {
-//                   setForm(prev => ({
-//                     ...prev,
-//                     [key]: e.target.value
-//                   }))
-
-//                 }}
-
-//                 invalid={validated && validationField(key, form[key]).error ? true : undefined}
-//               />
-//               <FormFeedback invalid={validated && validationField(key, form[key]).error ? true : undefined} > {validationField(key, form[key]).msg} </FormFeedback>
-//             </FormGroup>
-
-//           ))}
-
-//           <Row>
-//             <Col>
-//               <Button type="submit">Submit</Button>
-//             </Col>
-//             <Col>
-//               Cancel
-//             </Col>
-//           </Row>
-
-//         </Form>
-
-
-//       </Row>
-
-
-
-//     </>
-//   )
-// }
 
 export default FormEdit
