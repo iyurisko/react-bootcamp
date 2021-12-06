@@ -54,6 +54,7 @@ $ npm run profile.
 
 ###  :file_folder: File Structure
 
+```
 SRC
 ├── component
 |     └──modal.jsx 
@@ -86,7 +87,7 @@ SRC
 ├── package.json
 ├── profile.json
 └── README.md
-
+```
 
 ## :cherry_blossom: Community
 
