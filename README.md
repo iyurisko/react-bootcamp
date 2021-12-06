@@ -99,12 +99,12 @@ SRC
 
 2. **`formik`** integrated formic on auth pages branch.
 
-2. **`complete`** is the complete crud branch.
+2. **`complete-materials`** is the complete crud branch.
 
 
 ##  :page_facing_up: Resources
 
-- axios: axios-http.com/docs/api_intro
+- axios: https://axios-http.com/docs/api_intro
 - formik : https://formik.org/docs/overview
 - json-server  : https://github.com/typicode/json-server
 - react router dom : https://reactrouter.com/docs/en/v6/getting-started/overview
