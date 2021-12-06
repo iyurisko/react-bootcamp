@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# Introduction
+Welcome to React-Bootcamp
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## :ledger: Index
 
-## Available Scripts
+- [About](#beginner-about)
+- [Usage](#zap-usage)
+  - [Installation](#electric_plug-installation)
+  - [Commands](#package-commands)
+- [Development](#wrench-development)
+  - [Pre-Requisites](#notebook-pre-requisites)
+  - [File Structure](#file_folder-file-structure)
+- [Community](#cherry_blossom-community)
+  - [Branches](#cactus-branches)
+- [Resources](#page_facing_up-resources)
 
-In the project directory, you can run:
+##  :beginner: About
+This is  a project for handons material on React.js, including:
+* React-Hooks
+* Basic CRUD system
+* Form using formik
+* Fake server using json-server
 
-### `npm start`
+## :zap: Usage
+This is great for source to learn React.js
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+###  :electric_plug: Installation
+- Clone this repository.
+- Install node modules
+```
+$ npm install.
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+###  :package: Commands
+- To run this project 
+```
+$ npm start.
+```
+- To run this products server 
+```
+$ npm run server.
+```
+- To run this fake auth server 
+```
+$ npm run profile.
+```
 
-### `npm test`
+##  :wrench: Development
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### :notebook: Pre-Requisites
+- Node.js
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+###  :file_folder: File Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+SRC
+├── component
+|     └──modal.jsx 
+├── pages
+|     ├── auth
+│     |   ├── index.jsx
+│     |   ├── login.jsx
+│     │   └── register.jsx
+|     ├── catalog
+│     |   ├── byId.jsx
+│     │   └── index.jsx
+|     └── dashboard
+│         ├── createData.jsx
+│         ├── editData.jsx
+│         └── index.jsx
+├── service
+│     ├── auth.js
+│     └── products.js
+├── styles
+|     ├── component
+|     └── pages
+│     |   └──  auth.scss
+│     |   
+│     └── index.scss
+├── App.js
+├── index.css
+├── index.js
+├── CODE
+├── db.json
+├── package.json
+├── profile.json
+└── README.md
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## :cherry_blossom: Community
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ ### :cactus: Branches
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. **`react-hook`** is for hooks learning branch.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+2. **`basic-crud`** is the very simple crud branch.
 
-## Learn More
+2. **`formik`** integrated formic on auth pages branch.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. **`complete`** is the complete crud branch.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+##  :page_facing_up: Resources
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- axios: axios-http.com/docs/api_intro
+- formik : https://formik.org/docs/overview
+- json-server  : https://github.com/typicode/json-server
+- react router dom : https://reactrouter.com/docs/en/v6/getting-started/overview
+- reactrap: reactstrap.github.io
+- sass: https://sass-lang.com/
+- yup : https://github.com/jquense/yup
