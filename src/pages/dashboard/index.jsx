@@ -9,7 +9,7 @@ import {
 import Modal from "../../component/Modal";
 import FormCreate from "./createData";
 import FormEdit from "./editData";
-import axios from "axios";
+import { deleteProducts, getProducts } from "../../service/product";
 
 
 const Dashboard = () => {
@@ -20,14 +20,13 @@ const Dashboard = () => {
   const [editedDataId, setEditedDataId] = useState({})
 
   const handleDelete = async (id) => {
-    try {
-      let newData = data
-      const updatedRows = data.rows.filter( v=> id !== v.id);
-      newData.rows = updatedRows
-      await axios.post(`http://localhost:3001/data`, (data))
-      setData(prev=> ({...prev, rows: updatedRows}))
-    } catch (error) {
-      console.error(error)
+
+    const { code, msg, products } = await deleteProducts(data, id)
+    if (code === 200) {
+      console.log({products})
+      setData(products)
+    } else {
+      alert(msg)
     }
   }
 
@@ -37,12 +36,11 @@ const Dashboard = () => {
   }
 
   const getData = async () => {
-    try {
-      const  {data}  = await axios.get(`http://localhost:3001/data`)
-      setData(data)
-    } catch (e) {
-      console.log(e)
-      // bisa diganti toast
+    const {code, products ,msg} = await getProducts()
+    if(code === 200 ){
+      setData(products)
+    }else{
+      alert(msg)
     }
   }
 
@@ -50,6 +48,7 @@ const Dashboard = () => {
     getData()
     // ... another func
   }, [])
+
 
   return (
     <>

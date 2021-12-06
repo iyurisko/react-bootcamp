@@ -8,7 +8,7 @@ const CatalogByID = () =>{
     console.log(params)
     return (
         <>
-        LIST CATALOG by Id {params.id}
+        LIST CATALOG by Id : {params.id}
         </>
     )
 }

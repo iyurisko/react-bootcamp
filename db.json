@@ -1,12 +1,5 @@
 {
   "data": {
-    "3": {
-      "id": 393118336232.49817,
-      "name": "klk sds",
-      "price": "787",
-      "stock": "8787",
-      "category": "hjhjh"
-    },
     "headers": [
       "No",
       "name",
@@ -18,7 +11,7 @@
     "rows": [
       {
         "id": "222",
-        "name": "Jaket",
+        "name": "Jaket 1",
         "price": 200000,
         "stock": 200,
         "category": "pakaian"
@@ -38,11 +31,18 @@
         "category": "pakaian"
       },
       {
-        "id": 393118336232.49817,
-        "name": "klk sds",
-        "price": "787",
-        "stock": "8787",
-        "category": "hjhjh"
+        "id": 620575454116.3038,
+        "name": "jkj",
+        "price": "8",
+        "stock": "8",
+        "category": "klakslaskas"
+      },
+      {
+        "id": 54347121712.72373,
+        "name": "sa",
+        "price": "1",
+        "stock": "1",
+        "category": "dsds"
       }
     ]
   }

@@ -8,7 +8,7 @@ import {
   Form
 } from 'reactstrap';
 import React, { useState } from "react";
-import axios from 'axios';
+import { createProducts } from '../../service/product';
 
 const initialFormValue = {
   id: Math.random() * Date.now(),
@@ -18,17 +18,17 @@ const initialFormValue = {
   category: ""
 }
 
-const FormInput = ({ data, setOpen }) => {
-  const [form, setForm] = useState(initialFormValue)
+const FormInput = ({ data, setOpen,setData }) => {
+  const [form, setForm] = useState(initialFormValue);
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      let newData = data
-      newData.rows.push(form)
-      await axios.post(`http://localhost:3001/data`, (newData))
+    e.preventDefault()
+    const { code, msg, products } = await createProducts(data, form)
+    if (code === 200) {
+      setData(products)
       setOpen(false);
-    } catch (error) {
-      console.log(error)
+    } else {
+      alert(msg)
     }
   }
 

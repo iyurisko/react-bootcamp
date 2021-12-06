@@ -2,7 +2,7 @@ import { React } from 'react'
 import { Button, Container, FormFeedback, Input } from 'reactstrap'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import axios from 'axios'
+import { authRegister } from '../../service/auth'
 
 const validationSchema = yup.object().shape({
   email: yup.string().email().required(),
@@ -26,19 +26,15 @@ const Register = ({setCurrentContainer}) => {
   });
 
   const handleRegister = async (e) => {
-    const { email, password, username} = formik.values;  
-    const { data } = await axios.get(`http://localhost:3002/data`)  // get User from db
-    const user = data.filter(v => v.email === email || v.username === username)  
-  
-    if(user.length > 0){
-      alert("user sudah digunakan")
-    }else{
-      const id =  Math.random() * Date.now();
-      await axios.post(`http://localhost:3002/data`, { id, email, password,  username});
+    const {code, msg} = await  authRegister(formik.values)
+    if(code === 200){
       setCurrentContainer(false);
-      alert("akun berhasil dibuat, silahkan login")
+      alert(msg)
+    }else{
+      alert(msg)   
     }
   }
+
   return (
     <Container className="container-register">
       <form onSubmit={formik.handleSubmit}>

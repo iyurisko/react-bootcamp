@@ -9,8 +9,10 @@ const AuthPages = () => {
   const [currentContainer, setCurrentContainer] = useState(false)
 
   useEffect(() => {
+    // cek jika user sudah terotentikasi
     let isAuth = sessionStorage.getItem('logged')
     if (isAuth) {
+      //arahkan user kembali ke dashboard jika sudah login
       navigate({ pathname: './dashboard' }) 
     }
   }, [navigate])
@@ -35,12 +37,12 @@ const AuthPages = () => {
                     <div className={`card-register `}>
                       <h3>Sign up</h3>
                       <Signup setCurrentContainer={setCurrentContainer} />
-                      <button className="btn-chang-container" onClick={() => setCurrentContainer(false)}> Already have account?</button>
+                      <button className="btn-chang-container" onClick={() => setCurrentContainer(false)}> Sudah punya Akun?</button>
                     </div> :
                     <div className={`card-login`}>
                       <h3>Login</h3>
                       <Login />
-                      <button className="btn-chang-container"  onClick={() => setCurrentContainer(true)}>Create Account</button>
+                      <button className="btn-chang-container"  onClick={() => setCurrentContainer(true)}>Daftar</button>
                     </div>
                 }
               </div>

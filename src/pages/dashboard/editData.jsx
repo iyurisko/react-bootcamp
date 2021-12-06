@@ -8,7 +8,7 @@ import {
   Form
 } from 'reactstrap';
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import { editProducts } from '../../service/product';
 
 const initialFormValue = {
   id: Math.random * Date.now(),
@@ -21,17 +21,16 @@ const initialFormValue = {
 const FormEdit = ({ data, setOpen, editedDataId, setData }) => {
   const [form, setForm] = useState(initialFormValue)
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let newData = data
-    const editedData = data.rows.map(
-      (row, index) => (
-      row.id === editedDataId ? data[index] = form : { ...row }))
-    newData.rows = editedData
-    await axios.post(`http://localhost:3001/data`, (newData))
-    setData(prev => ({ ...prev, data: editedData }))
-    setOpen(false)
+    console.log(data)
+    const { code, msg, products } = await editProducts(data, form, editedDataId)
+    if (code === 200) {
+      setData(products)
+      setOpen(false)
+    } else {
+      alert(msg)
+    }
   }
 
   useEffect(() => {
