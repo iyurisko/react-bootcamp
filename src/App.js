@@ -66,8 +66,8 @@ const App = () => {
         <li> Terdapat field email dan password </li>
         <li> Apabila Pasword benar munculkan alert "login sucess" </li>
         <li> Apabila Email salah munculkan alert "email salah" </li>
-        <li> Apabila password salah munculkan alert "pasword salah sebanyak ... kali" </li>
-        <li> Apabila password salah  3X munculkan alert "pasword salah sebanyak 3 kali, akun anda kami tannguhkan" </li>
+        <li> Apabila password salah munculkan alert "password salah sebanyak ... kali" </li>
+        <li> Apabila password salah  3X munculkan alert "password salah sebanyak 3 kali, akun anda kami tangguhkan" </li>
         <li> email=test@dev.com pass=12345  </li>
 
       </ul>
