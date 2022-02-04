@@ -1,7 +1,7 @@
-import AuthPages from './pages/auth';
-import Dashboard from './pages/dashboard';
-import Catalog from './pages/catalog';
-import CatalogByID from './pages/catalog/byId';
+import AuthPages from './pages/Auth';
+import Dashboard from './pages/Dashboard';
+import Catalog from './pages/Catalog';
+import CatalogByID from './pages/Catalog/byId';
 import {
   Routes,
   Route,
