@@ -23,7 +23,6 @@ const Dashboard = () => {
 
     const { code, msg, products } = await deleteProducts(data, id)
     if (code === 200) {
-      console.log({products})
       setData(products)
     } else {
       alert(msg)
@@ -36,10 +35,10 @@ const Dashboard = () => {
   }
 
   const getData = async () => {
-    const {code, products ,msg} = await getProducts()
-    if(code === 200 ){
+    const { code, products, msg } = await getProducts()
+    if (code === 200) {
       setData(products)
-    }else{
+    } else {
       alert(msg)
     }
   }
