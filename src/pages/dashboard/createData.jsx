@@ -55,7 +55,7 @@ const FormInput = ({ data, setOpen,setData }) => {
                 value={form.price}
                 onChange={(e) => setForm(prev => ({
                   ...prev,
-                  price: e.target.value
+                  price: e.target.value,
                 }))}
                 required
               />

@@ -27,7 +27,7 @@ const Catalog = () => {
       GET ALL LIST CATALOG
       <Row>
         {data.rows.map((row, idx) => (
-          <Col md={3}>
+          <Col sm={12} md={4}>
             <div className="card">
               <Row>
                 <img
