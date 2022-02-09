@@ -40,6 +40,10 @@ $ npm start.
 ```
 $ npm run server.
 ```
+- To run this fake server & react in parallel 
+$ npm run dev.
+```
+
 
 ##  :wrench: Development
 
@@ -69,10 +73,11 @@ SRC
 ├── styles
 |     ├── component
 |     └── pages
-│     |   └──  auth.scss
+│     |   ├──  auth.scss
+│     |   └──  catalog.jsx
 │     |   
 │     └── index.scss
-├── App.js
+├── App.jsx
 ├── index.css
 ├── index.js
 ├── env
