@@ -43,7 +43,11 @@ const FormInput = ({ action, data, setModalVisible, updateId }) => {
   }
 
   useEffect(() => {
-    if (action === "edit") setForm(data.find(v => v.id === updateId))
+    if (action === "edit"){
+      const editData = data.find(v => v.id === updateId)
+      delete editData.id
+      setForm(editData)
+    } 
   }, [data, action, updateId])
 
   return (
