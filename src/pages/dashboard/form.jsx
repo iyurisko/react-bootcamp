@@ -22,19 +22,25 @@ const FormInput = ({ action, data, setData, setModalVisible, updateId }) => {
 
   const [form, setForm] = useState(initialFormValue);
 
-
-  const hitApi = async () => "create" ? await createProducts(data, form) : await editProducts(data, form, editedDataId)
   const handleSubmit = (e) => {
-    e.preventDefault();    
-    const {code, products, msg } = hitApi()
-
-    if (code === 200) {
-      setData(products)
-      setOpen(false);
+    e.preventDefault();
+    if (action === "create") {
+      const { code, products, msg } = await createProducts(data, form)
+      if (code === 200) {
+        setData(products)
+        setOpen(false);
+      } else {
+        alert(msg)
+      }
     } else {
-      alert(msg)
+      const { code, products, msg } = await editProducts(data, form)
+      if (code === 200) {
+        setData(products)
+        setOpen(false);
+      } else {
+        alert(msg)
+      }
     }
-    
   };
 
   useEffect(() => {
