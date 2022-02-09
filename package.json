@@ -24,8 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server":"npx json-server --watch db.json --port 3001",
-    "profile":"npx json-server --watch profile.json --port 3002"
+    "server":"npx json-server --watch db.json --port 8080"
   },
   "eslintConfig": {
     "extends": [

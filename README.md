@@ -22,7 +22,7 @@ This is  a project for handons material on React.js, including:
 * Fake server using json-server
 
 ## :zap: Usage
-This is great for source to learn React.js
+This is a great source for learn React.js
 
 ###  :electric_plug: Installation
 - Clone this repository.
@@ -36,20 +36,15 @@ $ npm install.
 ```
 $ npm start.
 ```
-- To run this products server 
+- To run this fake server 
 ```
 $ npm run server.
-```
-- To run this fake auth server 
-```
-$ npm run profile.
 ```
 
 ##  :wrench: Development
 
 ### :notebook: Pre-Requisites
 - Node.js
-
 
 
 ###  :file_folder: File Structure
@@ -67,12 +62,10 @@ SRC
 │     |   ├── byId.jsx
 │     │   └── index.jsx
 |     └── dashboard
-│         ├── createData.jsx
-│         ├── editData.jsx
+│         ├── form.jsx
 │         └── index.jsx
 ├── service
-│     ├── auth.js
-│     └── products.js
+│     └── auth.js
 ├── styles
 |     ├── component
 |     └── pages
@@ -82,14 +75,10 @@ SRC
 ├── App.js
 ├── index.css
 ├── index.js
-├── CODE
+├── env
 ├── db.json
 ├── package.json
-├── profile.json
 └── README.md
-```
-
-## :cherry_blossom: Community
 
  ### :cactus: Branches
 
@@ -97,9 +86,9 @@ SRC
 
 2. **`basic-crud`** is the very simple crud branch.
 
-2. **`formik`** integrated formic on auth pages branch.
+3. **`formik`** integrated formik on auth pages branch.
 
-2. **`complete-materials`** is the complete crud branch.
+4. **`json-server`** integrated axios &  json-server for consume api crud branch.
 
 
 ##  :page_facing_up: Resources
