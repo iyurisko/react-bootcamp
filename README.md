@@ -41,6 +41,7 @@ $ npm start.
 $ npm run server.
 ```
 - To run this fake server & react in parallel 
+```
 $ npm run dev.
 ```
 
@@ -85,6 +86,7 @@ SRC
 ├── package.json
 └── README.md
 ```
+
 
  ### :cactus: Branches
 
