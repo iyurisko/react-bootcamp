@@ -1,27 +1,23 @@
-{
-    "headers": ["No", "Name", "Price", "Stock", "Category", "Option"],
-    "rows": [
-      {
-        "id": "222",
-        "name": "Jaket",
-        "price": 200000,
-        "stock": 200,
-        "category": "pakaian"
-      },
-      {
-        "id": "1",
-        "name": "Celana",
-        "price": 200000,
-        "stock": 200,
-        "category": "pakaian"
-      },
-      {
-        "id": "23",
-        "name": "Baju",
-        "price": 200000,
-        "stock": 200,
-        "category": "pakaian"
-      }
-    ]
+[
+  {
+    "id": "222",
+    "name": "Jaket",
+    "description": "jaket",
+    "price": 200000,
+    "stock": 200
+  },
+  {
+    "id": "1",
+    "name": "Celana",
+    "description": "celana",
+    "price": 200000,
+    "stock": 200
+  },
+  {
+    "id": "23",
+    "name": "Baju",
+    "description": "pakaian",
+    "price": 200000,
+    "stock": 200
   }
-  
+]

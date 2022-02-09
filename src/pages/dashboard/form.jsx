@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Row,
@@ -7,35 +8,40 @@ import {
   Label,
   Form
 } from 'reactstrap';
-import { useState, useEffect } from "react";
 
 const initialFormValue = {
-  id: Math.random * Date.now(),
+  id: Math.random() * Date(),
   name: "",
+  description: "",
   price: 0,
   stock: 0,
-  category: ""
 }
 
-const FormEdit = ({ data, setOpen, editedDataId, setData }) => {
-  const [form, setForm] = useState(initialFormValue)
+const FormInput = ({ action, data, setData, setModalVisible, updateId }) => {
 
+  const [form, setForm] = useState(initialFormValue);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const editedData = data.map(
-      (row, index) => (
-      row.id === editedDataId ? data[index] = form : { ...row }))
 
-
-    setData(prev => ({ ...prev, data: editedData }))
-    setOpen(false)
-  }
+    if (action === "create") {
+      
+      data.push(form);
+      setData(data)
+    
+    } else {
+    
+      const index = data.findIndex((p) => p.id === updateId)
+      data[index] = form
+      setData(data)
+    
+    }
+    setModalVisible(false)
+  };
 
   useEffect(() => {
-    const editedData = data.filter((v) => v.id === editedDataId)[0]
-    setForm(editedData)
-  },[data, editedDataId])
+    if (action === "edit") setForm(data.find(v=> v.id === updateId))
+  }, [data, action, updateId])
 
   return (
     <>
@@ -49,6 +55,17 @@ const FormEdit = ({ data, setOpen, editedDataId, setData }) => {
                 onChange={(e) => setForm(prev => ({
                   ...prev,
                   name: e.target.value
+                }))}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Category</Label>
+              <Input
+                value={form.description}
+                onChange={(e) => setForm(prev => ({
+                  ...prev,
+                  description: e.target.value
                 }))}
                 required
               />
@@ -77,24 +94,13 @@ const FormEdit = ({ data, setOpen, editedDataId, setData }) => {
                 required
               />
             </FormGroup>
-            <FormGroup>
-              <Label>Category</Label>
-              <Input
-                value={form.category}
-                onChange={(e) => setForm(prev => ({
-                  ...prev,
-                  category: e.target.value
-                }))}
-                required
-              />
-            </FormGroup>
           </>
           <Row>
             <Col>
               <Button color="primary" type="submit"> Submit</Button>
             </Col>
             <Col>
-              <Button onClick={() => setOpen(false)} > Cancel </Button>
+              <Button onClick={() => setModalVisible(false)} > Cancel </Button>
             </Col>
           </Row>
         </Form>
@@ -103,4 +109,4 @@ const FormEdit = ({ data, setOpen, editedDataId, setData }) => {
   )
 }
 
-export default FormEdit
+export default FormInput
