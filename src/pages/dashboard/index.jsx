@@ -76,7 +76,7 @@ const Dashboard = () => {
 
       {/* Modal Form */}
       <Modal
-        title={actionForm === "create" ? "Add Data" : "Edit Data"}
+        title={`Form ${actionForm} Data`}
         isOpen={modalVisible}
         setOpen={setModalVisible}
         children={
