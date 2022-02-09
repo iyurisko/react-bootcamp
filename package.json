@@ -24,7 +24,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server":"npx json-server --watch db.json --port 8080"
+    "server": "npx json-server --watch db.json --port 8080",
+    "dev": "concurrently --kill-others \"react-scripts start\" \"npx json-server --watch db.json --port 8080\""
   },
   "eslintConfig": {
     "extends": [
@@ -43,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
   }
 }

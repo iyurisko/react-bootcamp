@@ -55,6 +55,7 @@ const FormInput = ({ action, data, setModalVisible, updateId }) => {
               <FormGroup key={idx}>
                 <Label>{key}</Label>
                 <Input
+                  type={key === "name" || key === "description" ? "text" : "number" }
                   value={form[key]}
                   placeholder={key}
                   onChange={(e) => setForm(prev => ({

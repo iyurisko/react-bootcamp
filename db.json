@@ -1,84 +1,32 @@
 {
   "products": [
     {
-      "id": "1",
-      "name": "jacket",
+      "name": "baju",
       "description": "new product",
-      "price": 112,
-      "stock": 200,
-      "category": "pakaian"
-    },
-    {
-      "id": "2",
-      "name": "bulb",
-      "description": "new product",
-      "price": 213,
-      "stock": 200,
-      "category": "pakaian"
-    },
-    {
-      "id": "3",
-      "name": "shoes",
-      "description": "new product",
-      "price": "8",
-      "stock": "8"
-    },
-    {
-      "id": "4",
-      "name": "phone",
-      "description": "new product",
-      "price": "1",
-      "stock": "1",
-      "category": "dsds"
-    },
-    {
-      "id": "5",
-      "name": "oke",
-      "description": "22",
-      "price": "2",
-      "stock": "1"
-    },
-    {
-      "id": "Zb2UyvX",
-      "name": "wqw",
-      "description": "wqwq",
-      "price": "2",
-      "stock": "2"
-    },
-    {
-      "name": "ssq",
-      "description": "sws",
-      "price": "3",
-      "stock": "2",
+      "price": "12",
+      "stock": "12121",
       "id": "o83yE8m"
     },
     {
-      "name": "ssq",
-      "description": "sws",
-      "price": "3",
-      "stock": "2",
+      "name": "celana",
+      "description": "cool product",
+      "price": 3000,
+      "stock": 22,
       "id": "DTtk-IB"
     },
     {
-      "name": "okokw 2",
-      "description": "jkjdjk",
-      "price": "3",
-      "stock": "4",
+      "name": "jacket",
+      "description": "black style",
+      "price": 32223,
+      "stock": 44,
       "id": "Q8vgR5W"
     },
     {
-      "name": "s",
-      "description": "s",
-      "price": 0,
-      "stock": 0,
+      "name": "glasses",
+      "description": "minimalist looks",
+      "price": 12,
+      "stock": 122,
       "id": "O48f-y1"
-    },
-    {
-      "name": "name",
-      "description": "name",
-      "price": 0,
-      "stock": 0,
-      "id": "IZYzXfw"
     }
   ],
   "profiles": [
