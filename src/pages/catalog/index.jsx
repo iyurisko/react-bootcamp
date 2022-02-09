@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { getProducts } from '../../service/product'
 import { Button, Col, Label, Row } from 'reactstrap'
+import axios from 'axios';
 
+const productApiURL = process.env.REACT_APP_PRODUCT_API_URL;
 
 const Catalog = () => {
 
   const [data, setData] = useState({ headers: [], rows: [] });
 
   const getData = async () => {
-    const { code, products, msg } = await getProducts()
-    if (code === 200) {
-      setData(products)
-    } else {
-      alert(msg)
-    }
+    await axios.get(`${productApiURL}`)
+    .then(({data}) => {
+      setData(data)
+    })
+    .catch(err => alert(err))
   }
 
   useEffect(() => {

@@ -8,40 +8,39 @@ import {
   Label,
   Form
 } from 'reactstrap';
-import { createProducts } from '../../service/product';
+import axios from 'axios';
+
+const productApiURL = process.env.REACT_APP_PRODUCT_API_URL;
 
 const initialFormValue = {
-  id: Math.random() * Date(),
   name: "",
   description: "",
   price: 0,
   stock: 0,
 }
 
-const FormInput = ({ action, data, setData, setModalVisible, updateId }) => {
-
+const FormInput = ({ action, data, setModalVisible, updateId }) => {
   const [form, setForm] = useState(initialFormValue);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (action === "create") {
-      const { code, products, msg } = await createProducts(data, form)
-      if (code === 200) {
-        setData(products)
-        setOpen(false);
-      } else {
-        alert(msg)
-      }
+      await axios.post(productApiURL, form)
+        .then(() => {
+          data.push(form);
+          setModalVisible(false);
+        })
+        .catch(err => alert(err))
     } else {
-      const { code, products, msg } = await editProducts(data, form)
-      if (code === 200) {
-        setData(products)
-        setOpen(false);
-      } else {
-        alert(msg)
-      }
+      await axios.put(`${productApiURL}/${updateId}`, form)
+        .then(() => {
+          const index = data.findIndex((p) => p.id === updateId)
+          data[index] = form
+          setModalVisible(false);
+        })
+        .catch(err => alert(err))
     }
-  };
+  }
 
   useEffect(() => {
     if (action === "edit") setForm(data.find(v => v.id === updateId))
@@ -52,52 +51,20 @@ const FormInput = ({ action, data, setData, setModalVisible, updateId }) => {
       <Row>
         <Form onSubmit={handleSubmit}>
           <>
-            <FormGroup>
-              <Label>Name</Label>
-              <Input
-                value={form.name}
-                onChange={(e) => setForm(prev => ({
-                  ...prev,
-                  name: e.target.value
-                }))}
-                required
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Category</Label>
-              <Input
-                value={form.description}
-                onChange={(e) => setForm(prev => ({
-                  ...prev,
-                  description: e.target.value
-                }))}
-                required
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Price</Label>
-              <Input
-                type="number"
-                value={form.price}
-                onChange={(e) => setForm(prev => ({
-                  ...prev,
-                  price: e.target.value
-                }))}
-                required
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Stock</Label>
-              <Input
-                type="number"
-                value={form.stock}
-                onChange={(e) => setForm(prev => ({
-                  ...prev,
-                  stock: e.target.value
-                }))}
-                required
-              />
-            </FormGroup>
+            {Object.keys(form).map((key, idx) => (
+              <FormGroup key={idx}>
+                <Label>{key}</Label>
+                <Input
+                  value={form[key]}
+                  placeholder={key}
+                  onChange={(e) => setForm(prev => ({
+                    ...prev,
+                    [key]: e.target.value
+                  }))}
+                  required
+                />
+              </FormGroup>
+            ))}
           </>
           <Row>
             <Col>

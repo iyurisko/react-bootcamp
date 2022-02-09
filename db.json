@@ -1,56 +1,92 @@
 {
-  "data": {
-    "headers": [
-      "No",
-      "name",
-      "price",
-      "stock",
-      "category",
-      "Option"
-    ],
-    "rows": [
-      {
-        "id": "222",
-        "name": "jacket",
-        "price": 112,
-        "stock": 200,
-        "category": "pakaian"
-      },
-      {
-        "id": "1",
-        "name": "pen",
-        "price": 234,
-        "stock": 200,
-        "category": "pakaian"
-      },
-      {
-        "id": "23",
-        "name": "bulb",
-        "price": 213,
-        "stock": 200,
-        "category": "pakaian"
-      },
-      {
-        "id": 620575454116.3038,
-        "name": "shoes",
-        "price": "8",
-        "stock": "8",
-        "category": "klakslaskas"
-      },
-      {
-        "id": 54347121712.72373,
-        "name": "phone",
-        "price": "1",
-        "stock": "1",
-        "category": "dsds"
-      },
-      {
-        "id": 927173515728.5875,
-        "name": "desk",
-        "price": "23232",
-        "stock": "32320",
-        "category": "<img src onError={alert('oje')}/>"
-      }
-    ]
-  }
+  "products": [
+    {
+      "id": "1",
+      "name": "jacket",
+      "description": "new product",
+      "price": 112,
+      "stock": 200,
+      "category": "pakaian"
+    },
+    {
+      "id": "2",
+      "name": "bulb",
+      "description": "new product",
+      "price": 213,
+      "stock": 200,
+      "category": "pakaian"
+    },
+    {
+      "id": "3",
+      "name": "shoes",
+      "description": "new product",
+      "price": "8",
+      "stock": "8"
+    },
+    {
+      "id": "4",
+      "name": "phone",
+      "description": "new product",
+      "price": "1",
+      "stock": "1",
+      "category": "dsds"
+    },
+    {
+      "id": "5",
+      "name": "oke",
+      "description": "22",
+      "price": "2",
+      "stock": "1"
+    },
+    {
+      "id": "Zb2UyvX",
+      "name": "wqw",
+      "description": "wqwq",
+      "price": "2",
+      "stock": "2"
+    },
+    {
+      "name": "ssq",
+      "description": "sws",
+      "price": "3",
+      "stock": "2",
+      "id": "o83yE8m"
+    },
+    {
+      "name": "ssq",
+      "description": "sws",
+      "price": "3",
+      "stock": "2",
+      "id": "DTtk-IB"
+    },
+    {
+      "name": "okokw 2",
+      "description": "jkjdjk",
+      "price": "3",
+      "stock": "4",
+      "id": "Q8vgR5W"
+    },
+    {
+      "name": "s",
+      "description": "s",
+      "price": 0,
+      "stock": 0,
+      "id": "O48f-y1"
+    },
+    {
+      "name": "name",
+      "description": "name",
+      "price": 0,
+      "stock": 0,
+      "id": "IZYzXfw"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "1",
+      "email": "testdev@mail.com",
+      "password": "tes12345",
+      "username": "iyurisko"
+    }
+  ]
 }

@@ -8,7 +8,9 @@ import {
 } from 'reactstrap';
 import Modal from "../../component/Modal";
 import Form from "./form";
-import { deleteProducts, getProducts } from "../../service/product";
+import axios from "axios";
+
+const productApiURL = process.env.REACT_APP_PRODUCT_API_URL;
 
 const Dashboard = () => {
 
@@ -23,13 +25,13 @@ const Dashboard = () => {
     setModalVisible(true);
   }
 
-  const handleDelete = (id) => {
-    const { code, msg, products } = await deleteProducts(data, id)
-    if (code === 200) {
-      setData(products)
-    } else {
-      alert(msg)
-    }
+  const handleDelete = async (id) => {
+    await axios.delete(`${productApiURL}/${id}`)
+    .then(() => {
+      const updatedData = data.filter(v => id !== v.id);
+      setData(updatedData)
+    })
+    .catch(err => alert(err))
   }
 
   const handleEdit = (id) => {
@@ -39,12 +41,11 @@ const Dashboard = () => {
   }
 
   const getData = async () => {
-    const {code, products ,msg} = await getProducts()
-    if(code === 200 ){
-      setData(products)
-    }else{
-      alert(msg)
-    }
+    await axios.get(`${productApiURL}`)
+    .then(({data}) => {
+      setData(data)
+    })
+    .catch(err => alert(err))
   }
 
   useEffect(() => {
@@ -96,7 +97,6 @@ const Dashboard = () => {
           <Form
             action={actionForm}
             data={data}
-            setData={setData}
             setModalVisible={setModalVisible}
             updateId={updateId}
           />
