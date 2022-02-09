@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Row,
@@ -7,30 +8,38 @@ import {
   Label,
   Form
 } from 'reactstrap';
-import React, { useState } from "react";
 import { createProducts } from '../../service/product';
 
 const initialFormValue = {
-  id: Math.random() * Date.now(),
+  id: Math.random() * Date(),
   name: "",
+  description: "",
   price: 0,
   stock: 0,
-  category: ""
 }
 
-const FormInput = ({ data, setOpen,setData }) => {
+const FormInput = ({ action, data, setData, setModalVisible, updateId }) => {
+
   const [form, setForm] = useState(initialFormValue);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    const { code, msg, products } = await createProducts(data, form)
+
+  const hitApi = async () => "create" ? await createProducts(data, form) : await editProducts(data, form, editedDataId)
+  const handleSubmit = (e) => {
+    e.preventDefault();    
+    const {code, products, msg } = hitApi()
+
     if (code === 200) {
       setData(products)
       setOpen(false);
     } else {
       alert(msg)
     }
-  }
+    
+  };
+
+  useEffect(() => {
+    if (action === "edit") setForm(data.find(v => v.id === updateId))
+  }, [data, action, updateId])
 
   return (
     <>
@@ -49,13 +58,24 @@ const FormInput = ({ data, setOpen,setData }) => {
               />
             </FormGroup>
             <FormGroup>
+              <Label>Category</Label>
+              <Input
+                value={form.description}
+                onChange={(e) => setForm(prev => ({
+                  ...prev,
+                  description: e.target.value
+                }))}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
               <Label>Price</Label>
               <Input
                 type="number"
                 value={form.price}
                 onChange={(e) => setForm(prev => ({
                   ...prev,
-                  price: e.target.value,
+                  price: e.target.value
                 }))}
                 required
               />
@@ -72,24 +92,13 @@ const FormInput = ({ data, setOpen,setData }) => {
                 required
               />
             </FormGroup>
-            <FormGroup>
-              <Label>Category</Label>
-              <Input
-                value={form.category}
-                onChange={(e) => setForm(prev => ({
-                  ...prev,
-                  category: e.target.value
-                }))}
-                required
-              />
-            </FormGroup>
           </>
           <Row>
             <Col>
               <Button color="primary" type="submit"> Submit</Button>
             </Col>
             <Col>
-              <Button onClick={() => setOpen(false)} > Cancel </Button>
+              <Button onClick={() => setModalVisible(false)} > Cancel </Button>
             </Col>
           </Row>
         </Form>
