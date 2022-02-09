@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Row,
@@ -7,36 +8,44 @@ import {
   Label,
   Form
 } from 'reactstrap';
-import React, { useState, useEffect } from "react";
-import { editProducts } from '../../service/product';
+import { createProducts } from '../../service/product';
 
 const initialFormValue = {
-  id: Math.random * Date.now(),
+  id: Math.random() * Date(),
   name: "",
+  description: "",
   price: 0,
   stock: 0,
-  category: ""
 }
 
-const FormEdit = ({ data, setOpen, editedDataId, setData }) => {
-  const [form, setForm] = useState(initialFormValue)
+const FormInput = ({ action, data, setData, setModalVisible, updateId }) => {
 
-  const handleSubmit = async (e) => {
+  const [form, setForm] = useState(initialFormValue);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(data)
-    const { code, msg, products } = await editProducts(data, form, editedDataId)
-    if (code === 200) {
-      setData(products)
-      setOpen(false)
+    if (action === "create") {
+      const { code, products, msg } = await createProducts(data, form)
+      if (code === 200) {
+        setData(products)
+        setOpen(false);
+      } else {
+        alert(msg)
+      }
     } else {
-      alert(msg)
+      const { code, products, msg } = await editProducts(data, form)
+      if (code === 200) {
+        setData(products)
+        setOpen(false);
+      } else {
+        alert(msg)
+      }
     }
-  }
+  };
 
   useEffect(() => {
-    const editedData = data.rows.filter((v) => v.id === editedDataId)[0]
-    setForm(editedData)
-  },[data, editedDataId])
+    if (action === "edit") setForm(data.find(v => v.id === updateId))
+  }, [data, action, updateId])
 
   return (
     <>
@@ -50,6 +59,17 @@ const FormEdit = ({ data, setOpen, editedDataId, setData }) => {
                 onChange={(e) => setForm(prev => ({
                   ...prev,
                   name: e.target.value
+                }))}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Category</Label>
+              <Input
+                value={form.description}
+                onChange={(e) => setForm(prev => ({
+                  ...prev,
+                  description: e.target.value
                 }))}
                 required
               />
@@ -78,24 +98,13 @@ const FormEdit = ({ data, setOpen, editedDataId, setData }) => {
                 required
               />
             </FormGroup>
-            <FormGroup>
-              <Label>Category</Label>
-              <Input
-                value={form.category}
-                onChange={(e) => setForm(prev => ({
-                  ...prev,
-                  category: e.target.value
-                }))}
-                required
-              />
-            </FormGroup>
           </>
           <Row>
             <Col>
               <Button color="primary" type="submit"> Submit</Button>
             </Col>
             <Col>
-              <Button onClick={() => setOpen(false)} > Cancel </Button>
+              <Button onClick={() => setModalVisible(false)} > Cancel </Button>
             </Col>
           </Row>
         </Form>
@@ -104,4 +113,4 @@ const FormEdit = ({ data, setOpen, editedDataId, setData }) => {
   )
 }
 
-export default FormEdit
+export default FormInput

@@ -2,9 +2,12 @@ import axios from "axios"
 
 export const authLogin = async (req) => {
   try {
+    // backend Fe do...
     const { email, password } = req
+    // login  post method
     const { data } = await axios.get(`http://localhost:3002/data`)  // get all data dari DB
 
+    // backend actually do...
     const user = data.filter(v => v.email === email && v.password === password) || []//cek bila ada data yang sama
     if (user.length > 0) return { code: 200, status: "success", data, msg: "login sukses" }
     return { code: 404, status: "not found", data: null, msg: "User not found" }
@@ -19,6 +22,7 @@ export const authRegister = async (req) => {
     const { data } = await axios.get(`http://localhost:3002/data`)  // get all data dari DB
     const user = data.filter(v => v.email === email || v.username === username)   // cek jika data ada
 
+    // backend do
     if (user.length > 0) {
       return { code: 409, status: "conflict", msg: "User already exist" }
     } else {

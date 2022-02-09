@@ -13,7 +13,6 @@ const validationSchema = yup.object().shape({
 });
 
 const Register = ({setCurrentContainer}) => {
-
   const formik = useFormik({
     initialValues: {
       email: '',

@@ -2,6 +2,7 @@ import AuthPages from './pages/auth';
 import Dashboard from './pages/dashboard';
 import Catalog from './pages/catalog';
 import CatalogByID from './pages/catalog/byId';
+
 import {
   Routes,
   Route,

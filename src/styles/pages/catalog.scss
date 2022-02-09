@@ -1,0 +1,50 @@
+.catalog-pages {
+
+  .card {
+    margin: 10px;
+    border-radius: 8px ;
+
+    label {
+      margin: 5px 0px;
+      font-weight: 600;
+    }
+
+    .label-name {
+      font-size: 18px;
+      color: darkgray;
+    }
+
+
+    .label-desc {
+      font-size: 12px;
+    }
+
+    .label-price {
+      font-size: 20px;
+      color: red;
+      float: right;
+    }
+
+
+      .color {
+        display: inline-block;
+        margin: 5px;
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        border: none;
+      }
+    
+
+    .btn-add {
+      display: flex;
+      margin: 20px auto;
+      background-color: darkorange;
+      color: white;
+      font-weight: 800;
+      border: none;
+    }
+  }
+
+
+}
