@@ -1,8 +1,8 @@
 .auth-pages {
   // height: 500px;
 
-  border-top: solid 6px #0d6efd;
-  border-bottom: solid 6px #0d6efd;
+  border-top: solid 6px;
+  border-bottom: solid 6px;
   padding: 0px 50px;
 
   .background {
@@ -10,13 +10,12 @@
     padding: 0px 50px;
     text-align: end;
     line-height: 85px;
-    color: #ff2929;
-    text-shadow: 5px 5px #0d6efd;
+    text-shadow: 5px 5px #dddd;
     font-size: 60pt;
     font-weight: 700;
 
     hr{
-      color: #0d6efd;
+     
       height: 4px;
       opacity: 1;
     }
@@ -29,7 +28,7 @@
 
     .card-inner {
       width: 100%;
-      border: solid 4px #0d6efd;
+      border: solid 4px;
       border-radius: 8px;
     }
   }
@@ -42,7 +41,7 @@
   .container-login,
   .container-register {
     .form-control {
-      border: solid 2px #265bd3;
+      border: solid 2px;
       background-color: transparent;
     }
 
@@ -57,7 +56,7 @@
 
     .btn-submit {
       width: 250px;
-      background-color: #ff2929;
+      background-color: gray;
       display: flex;
       justify-content: center; /*centers items on the line (the x-axis by default)*/
       align-items: center; /*centers items on the cross-axis (y by default)*/
