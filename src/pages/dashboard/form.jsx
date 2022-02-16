@@ -12,42 +12,48 @@ import axios from 'axios';
 
 const productApiURL = process.env.REACT_APP_PRODUCT_API_URL;
 
-const initialFormValue = {
-  name: "",
-  description: "",
-  price: 0,
-  stock: 0,
-}
-
 const FormInput = ({ action, data, setModalVisible, updateId }) => {
+  
+  const initialFormValue = {
+    name: "",
+    description: "",
+    price: 0,
+    stock: 0,
+  }
+
   const [form, setForm] = useState(initialFormValue);
+  
+  const createData = async () => {
+    await axios.post(productApiURL, form)
+      .then(() => {
+        data.push(form);
+        setModalVisible(false);
+      })
+      .catch(err => alert(err))
+  };
+
+  const updatedData = async () => {
+    await axios.put(`${productApiURL}/${updateId}`, form)
+      .then(() => {
+        const index = data.findIndex((p) => p.id === updateId)
+        data[index] = form
+        setModalVisible(false);
+      })
+      .catch(err => alert(err))
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (action === "create") {
-      await axios.post(productApiURL, form)
-        .then(() => {
-          data.push(form);
-          setModalVisible(false);
-        })
-        .catch(err => alert(err))
-    } else {
-      await axios.put(`${productApiURL}/${updateId}`, form)
-        .then(() => {
-          const index = data.findIndex((p) => p.id === updateId)
-          data[index] = form
-          setModalVisible(false);
-        })
-        .catch(err => alert(err))
-    }
+    if (action === "create") return createData()
+    return updatedData()
   }
 
   useEffect(() => {
-    if (action === "edit"){
+    if (action === "edit") {
       const editData = data.find(v => v.id === updateId)
       delete editData.id
       setForm(editData)
-    } 
+    }
   }, [data, action, updateId])
 
   return (
@@ -59,7 +65,7 @@ const FormInput = ({ action, data, setModalVisible, updateId }) => {
               <FormGroup key={idx}>
                 <Label>{key}</Label>
                 <Input
-                  type={key === "name" || key === "description" ? "text" : "number" }
+                  type={key === "name" || key === "description" ? "text" : "number"}
                   value={form[key]}
                   placeholder={key}
                   onChange={(e) => setForm(prev => ({
