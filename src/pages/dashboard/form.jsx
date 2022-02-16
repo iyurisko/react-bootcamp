@@ -9,16 +9,24 @@ import {
   Form
 } from 'reactstrap';
 
-const initialFormValue = {
-  id: Math.random() * Date(),
-  name: "",
-  description: "",
-  price: 0,
-  stock: 0,
+
+const generateRandomId = (id) => {
+  console.log()
+  const ox = Math.random()
+  return  ox
 }
 
 const FormInput = ({ action, data, setData, setModalVisible, updateId }) => {
 
+  const initialFormValue = {
+    id:  Math.random() * Date.now(),
+    name: "",
+    description: "",
+    price: 0,
+    stock: 0,
+  }
+  
+  console.log(initialFormValue.id)
   const [form, setForm] = useState(initialFormValue);
 
   const handleSubmit = (e) => {
