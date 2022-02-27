@@ -9,46 +9,40 @@ import {
   Form
 } from 'reactstrap';
 
-
-const generateRandomId = (id) => {
-  console.log()
-  const ox = Math.random()
-  return  ox
-}
-
-const FormInput = ({ action, data, setData, setModalVisible, updateId }) => {
+const FormDashboard = ({ action, data, setModalVisible, updateId }) => {
 
   const initialFormValue = {
-    id:  Math.random() * Date.now(),
     name: "",
     description: "",
     price: 0,
     stock: 0,
   }
-  
-  console.log(initialFormValue.id)
+
   const [form, setForm] = useState(initialFormValue);
+
+  const createData = () => {
+    const newData = form;
+    newData["id"] = Math.random() * Date.now()
+    data.push(form);
+    setModalVisible(false)
+  }
+
+  const editData = () => {
+    const index = data.findIndex((p) => p.id === updateId)
+    data[index] = form
+    setModalVisible(false)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (action === "create") {
-      
-      data.push(form);
-      setData(data)
-    
-    } else {
-    
-      const index = data.findIndex((p) => p.id === updateId)
-      data[index] = form
-      setData(data)
-    
-    }
-    setModalVisible(false)
+    if (action === "create") return createData();
+    return editData()
   };
 
   useEffect(() => {
-    if (action === "edit") setForm(data.find(v=> v.id === updateId))
+    if (action === "edit") {
+      setForm(data.find(v => v.id === updateId))
+    }
   }, [data, action, updateId])
 
   return (
@@ -56,52 +50,19 @@ const FormInput = ({ action, data, setData, setModalVisible, updateId }) => {
       <Row>
         <Form onSubmit={handleSubmit}>
           <>
+          {Object.keys(form).map((key, idx) => (
             <FormGroup>
-              <Label>Name</Label>
+              <Label>{key}</Label>
               <Input
                 value={form.name}
                 onChange={(e) => setForm(prev => ({
                   ...prev,
-                  name: e.target.value
+                  [key]: e.target.value
                 }))}
                 required
               />
             </FormGroup>
-            <FormGroup>
-              <Label>Category</Label>
-              <Input
-                value={form.description}
-                onChange={(e) => setForm(prev => ({
-                  ...prev,
-                  description: e.target.value
-                }))}
-                required
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Price</Label>
-              <Input
-                type="number"
-                value={form.price}
-                onChange={(e) => setForm(prev => ({
-                  ...prev,
-                  price: e.target.value
-                }))}
-                required
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Stock</Label>
-              <Input
-                type="number"
-                value={form.stock}
-                onChange={(e) => setForm(prev => ({
-                  ...prev,
-                  stock: e.target.value
-                }))}
-                required
-              />
-            </FormGroup>
+          ))}
           </>
           <Row>
             <Col>
@@ -117,4 +78,4 @@ const FormInput = ({ action, data, setData, setModalVisible, updateId }) => {
   )
 }
 
-export default FormInput
+export default FormDashboard;
