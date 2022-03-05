@@ -3,6 +3,7 @@ import { Row, Col } from 'reactstrap'
 import Login from './login'
 import Signup from './register'
 import { useNavigate } from 'react-router-dom'
+import './style.scss';
 
 const AuthPages = () => {
   const navigate = useNavigate()

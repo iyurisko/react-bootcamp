@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Button, Col, Label, Row } from 'reactstrap'
 import axios from 'axios';
 
+import './style.scss'
+
 const productApiURL = process.env.REACT_APP_PRODUCT_API_URL;
 
 const Catalog = () => {
