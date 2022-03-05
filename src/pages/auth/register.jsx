@@ -2,17 +2,17 @@ import { React } from 'react'
 import { Button, Container, FormFeedback, Input } from 'reactstrap'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { authRegister } from '../../service/auth'
+import axios from 'axios'
 
 const validationSchema = yup.object().shape({
   email: yup.string().email().required(),
   username: yup.string().min(8).required(),
   password: yup.string().min(8).required(),
   retypePassword: yup.string()
-  .oneOf([yup.ref('password'), null], 'Passwords must match'),
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
-const Register = ({setCurrentContainer}) => {
+const Register = ({ setCurrentContainer }) => {
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -25,13 +25,16 @@ const Register = ({setCurrentContainer}) => {
   });
 
   const handleRegister = async (e) => {
-    const {code, msg} = await  authRegister(formik.values)
-    if(code === 200){
-      setCurrentContainer(false);
-      alert(msg)
-    }else{
-      alert(msg)   
-    }
+    const { email, username, password } = formik.values
+    await axios.post(`http://localhost:8080/register`, {
+      email,
+      username,
+      password
+    })
+      .then(() => {
+        setCurrentContainer(false);
+      })
+      .catch(err => console.error(err))
   }
 
   return (
@@ -41,7 +44,7 @@ const Register = ({setCurrentContainer}) => {
           Object.keys(formik.initialValues).map((key, index) => (
             <div key={index} className="row-input">
               <Input
-                type={key === "password" || key === "retypePassword" ?  "password" : "text"}
+                type={key === "password" || key === "retypePassword" ? "password" : "text"}
                 id={key}
                 name={key}
                 placeholder={key}

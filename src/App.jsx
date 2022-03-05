@@ -25,14 +25,13 @@ function NotFound() {
 }
 
 function RequireAuth() {
-  let auth = sessionStorage.getItem('logged');
-  let location = useLocation();
+  let auth = localStorage.getItem('acces_token');
 
   if (!auth) {
     // cek auth logged ada atau tidak
     // jika tidak ada maka arahkan ke login pages 
     // endpoint login ===>  'baseURL/'
-    return <Navigate to="/" state={{ from: location }} />;
+    return <Navigate to="/"/>;
   }
 
   //Renders child route's element, jika ada.

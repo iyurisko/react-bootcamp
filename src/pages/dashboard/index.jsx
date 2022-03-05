@@ -48,6 +48,10 @@ const Dashboard = () => {
     .catch(err => alert(err))
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem('acces_token');
+    window.location = '/'
+  }
   useEffect(() => {
     const header = ['No', 'Name', 'Description', 'Price', 'Stock', 'action']
     setHeader(header)
@@ -59,6 +63,8 @@ const Dashboard = () => {
       <h1> PRODUCT LIST </h1>
       <br />
       <Button color="primary" onClick={() => handleCreate()} > Add Data + </Button>
+      <br />
+      <Button color="danger" onClick={() => handleLogout()} >  Logout </Button>
       <br />  <br />
       <Table>
         <thead>

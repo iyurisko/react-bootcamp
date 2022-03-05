@@ -13,7 +13,7 @@ import axios from 'axios';
 const productApiURL = process.env.REACT_APP_PRODUCT_API_URL;
 
 const FormInput = ({ action, data, setModalVisible, updateId }) => {
-  
+
   const initialFormValue = {
     name: "",
     description: "",
@@ -22,14 +22,13 @@ const FormInput = ({ action, data, setModalVisible, updateId }) => {
   }
 
   const [form, setForm] = useState(initialFormValue);
-  
   const createData = async () => {
     await axios.post(productApiURL, form)
       .then(() => {
         data.push(form);
-        setModalVisible(false);
       })
       .catch(err => alert(err))
+    setModalVisible(false);
   };
 
   const updatedData = async () => {
@@ -37,9 +36,9 @@ const FormInput = ({ action, data, setModalVisible, updateId }) => {
       .then(() => {
         const index = data.findIndex((p) => p.id === updateId)
         data[index] = form
-        setModalVisible(false);
       })
       .catch(err => alert(err))
+    setModalVisible(false);
   }
 
   const handleSubmit = async (e) => {
@@ -50,7 +49,7 @@ const FormInput = ({ action, data, setModalVisible, updateId }) => {
 
   useEffect(() => {
     if (action === "edit") {
-      const editData = data.find(v => v.id === updateId)
+      const editData = Object.assign({}, data.find(v => v.id === updateId))
       delete editData.id
       setForm(editData)
     }

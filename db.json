@@ -29,12 +29,12 @@
       "id": "O48f-y1"
     }
   ],
-  "profiles": [
+  "users": [
     {
-      "id": "1",
       "email": "testdev@mail.com",
-      "password": "tes12345",
-      "username": "iyurisko"
+      "password": "$2a$10$X.es.XqP9OsID0O5UZq3gOQfx7VR3L2iA.hNMNIWi16fHdYROkT02",
+      "username": "testdev@mail.com",
+      "id": 1
     }
   ]
 }

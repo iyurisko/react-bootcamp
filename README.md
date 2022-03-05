@@ -22,7 +22,7 @@ This is  a project for handons material on React.js, including:
 * Fake server using json-server
 
 ## :zap: Usage
-This is a great source for learn React.js
+This is a great source to learn React.js
 
 ###  :electric_plug: Installation
 - Clone this repository.
@@ -36,21 +36,11 @@ $ npm install.
 ```
 $ npm start.
 ```
-- To run this fake server 
-```
-$ npm run server.
-```
-- To run this fake server & react in parallel 
-```
-$ npm run dev.
-```
-
 
 ##  :wrench: Development
 
 ### :notebook: Pre-Requisites
 - Node.js
-
 
 ###  :file_folder: File Structure
 
@@ -69,8 +59,6 @@ SRC
 |     └── dashboard
 │         ├── form.jsx
 │         └── index.jsx
-├── service
-│     └── auth.js
 ├── styles
 |     ├── component
 |     └── pages
@@ -96,7 +84,7 @@ SRC
 
 3. **`formik`** integrated formik on auth pages branch.
 
-4. **`json-server`** integrated axios &  json-server for consume api crud branch.
+4. **`json-server`** integrated axios &  json-server & json-server-auth for consume api crud branch.
 
 
 ##  :page_facing_up: Resources
@@ -104,6 +92,7 @@ SRC
 - axios: https://axios-http.com/docs/api_intro
 - formik : https://formik.org/docs/overview
 - json-server  : https://github.com/typicode/json-server
+- json-server-auth : https://github.com/jeremyben/json-server-auth/
 - react router dom : https://reactrouter.com/docs/en/v6/getting-started/overview
 - reactrap: reactstrap.github.io
 - sass: https://sass-lang.com/
