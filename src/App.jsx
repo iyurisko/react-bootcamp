@@ -6,7 +6,6 @@ import CatalogByID from './pages/catalog/byId';
 import {
   Routes,
   Route,
-  useLocation,
   Navigate,
   BrowserRouter,
   Outlet
@@ -25,7 +24,7 @@ function NotFound() {
 }
 
 function RequireAuth() {
-  let auth = localStorage.getItem('acces_token');
+  let auth = localStorage.getItem('access_token');
 
   if (!auth) {
     // cek auth logged ada atau tidak

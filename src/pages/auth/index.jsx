@@ -11,7 +11,7 @@ const AuthPages = () => {
 
   useEffect(() => {
     // cek jika user sudah terotentikasi
-    let isAuth = sessionStorage.getItem('logged')
+    let isAuth = localStorage.getItem('access_token')
     if (isAuth) {
       //arahkan user kembali ke dashboard jika sudah login
       navigate({ pathname: './dashboard' }) 

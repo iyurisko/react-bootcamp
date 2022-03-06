@@ -15,7 +15,7 @@ const Login = () => {
      
     await axios.post(`http://localhost:8080/login`,  data )
       .then(res => {
-        localStorage.setItem('acces_token', res.data.accessToken)
+        localStorage.setItem('access_token', res.data.accessToken)
         window.location = '/dashboard'
       })
       .catch(err => console.error(err)) 
