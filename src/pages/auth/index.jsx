@@ -1,22 +1,15 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState } from 'react'
 import { Row, Col } from 'reactstrap'
 import Login from './login'
 import Signup from './register'
-import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import './style.scss';
 
 const AuthPages = () => {
-  const navigate = useNavigate()
   const [currentContainer, setCurrentContainer] = useState(false)
-
-  useEffect(() => {
-    // cek jika user sudah terotentikasi
-    let isAuth = localStorage.getItem('access_token')
-    if (isAuth) {
-      //arahkan user kembali ke dashboard jika sudah login
-      navigate({ pathname: './dashboard' }) 
-    }
-  }, [navigate])
+  
+  const isAuth = localStorage.getItem('access_token')
+  if (isAuth)  return  <Navigate to="/dashboard" />;
 
   return (
     <div className={`auth-pages`}>

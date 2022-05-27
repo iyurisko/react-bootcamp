@@ -2,7 +2,7 @@ import AuthPages from './pages/auth';
 import Dashboard from './pages/dashboard';
 import Catalog from './pages/catalog';
 import CatalogByID from './pages/catalog/byId';
-
+import NotFound from './pages/notFound';
 import {
   Routes,
   Route,
@@ -10,18 +10,6 @@ import {
   BrowserRouter,
   Outlet
 } from 'react-router-dom'
-
-function NotFound() {
-  return (
-    <div className="home">
-      <p>
-        NOT FOUND 404
-        <br />
-        return to <a href='/'> HomePage </a> ?
-      </p>
-    </div>
-  );
-}
 
 function RequireAuth() {
   let auth = localStorage.getItem('access_token');

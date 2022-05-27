@@ -26,7 +26,7 @@ const Register = ({ setCurrentContainer }) => {
 
   const handleRegister = async (e) => {
     const { email, username, password } = formik.values
-    await axios.post(`http://localhost:8080/register`, {
+    await axios.post(`http://localhost:7777/register`, {
       email,
       username,
       password

@@ -9,16 +9,18 @@ import {
 import Modal from "../../component/Modal";
 import Form from "./form";
 import axios from "axios";
+import request from "../../request";
 
 const productApiURL = process.env.REACT_APP_PRODUCT_API_URL;
 
 const Dashboard = () => {
 
-  const [headers, setHeader] = useState([])
   const [data, setData] = useState([]);
   const [actionForm, setActionForm] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [updateId, setUpdateId] = useState(null);
+
+  const header = ['No', 'Name', 'Description', 'Price', 'Stock', 'action']
 
   const handleCreate = () => {
     setActionForm("create");
@@ -26,7 +28,7 @@ const Dashboard = () => {
   }
 
   const handleDelete = async (id) => {
-    await axios.delete(`${productApiURL}/${id}`)
+    await request.delete(`${productApiURL}/${id}`)
     .then(() => {
       const updatedData = data.filter(v => id !== v.id);
       setData(updatedData)
@@ -40,10 +42,11 @@ const Dashboard = () => {
     setModalVisible(true)
   }
 
-  const getData = async () => {
-    await axios.get(`${productApiURL}`)
+  const getData = () => {
+    request.get('/product')
     .then(({data}) => {
-      setData(data)
+      console.log(data, data)
+      setData(data.data)
     })
     .catch(err => alert(err))
   }
@@ -52,9 +55,8 @@ const Dashboard = () => {
     localStorage.removeItem('acces_token');
     window.location = '/'
   }
+
   useEffect(() => {
-    const header = ['No', 'Name', 'Description', 'Price', 'Stock', 'action']
-    setHeader(header)
     getData()
   }, [])
 
@@ -69,7 +71,7 @@ const Dashboard = () => {
       <Table>
         <thead>
           <tr>
-            {headers.map((header, idx) => (
+            {header.map((header, idx) => (
               <th key={idx}>{header} </th>
             ))}
           </tr>

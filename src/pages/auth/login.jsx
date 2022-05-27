@@ -12,10 +12,10 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     const data = formik.values
-     
-    await axios.post(`http://localhost:8080/login`,  data )
+
+    await axios.post(`http://localhost:7777/login`,  data )
       .then(res => {
-        localStorage.setItem('access_token', res.data.accessToken)
+        localStorage.setItem('access_token', res.data.token)
         window.location = '/dashboard'
       })
       .catch(err => console.error(err)) 
