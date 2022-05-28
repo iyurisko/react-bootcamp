@@ -1,39 +1,40 @@
-import  {
+import {
   useState,
   useEffect
 } from "react";
 import {
   Button,
-  Table
+  Row,
+  Table,
+  Col
 } from 'reactstrap';
 import Modal from "../../component/Modal";
 import Form from "./form";
-import axios from "axios";
 import request from "../../request";
 
 const productApiURL = process.env.REACT_APP_PRODUCT_API_URL;
 
 const Dashboard = () => {
 
-  const [data, setData] = useState([]);
+  const [employeeList, setEmployeeList] = useState([]);
   const [actionForm, setActionForm] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [updateId, setUpdateId] = useState(null);
 
-  const header = ['No', 'Name', 'Description', 'Price', 'Stock', 'action']
+  const header = ['No', 'Name', 'Age', 'Action']
 
   const handleCreate = () => {
     setActionForm("create");
     setModalVisible(true);
   }
 
-  const handleDelete = async (id) => {
-    await request.delete(`${productApiURL}/${id}`)
-    .then(() => {
-      const updatedData = data.filter(v => id !== v.id);
-      setData(updatedData)
-    })
-    .catch(err => alert(err))
+  const handleDelete = (id) => {
+    request.delete(`/employee/${id}`)
+      .then((res) => {
+        const updatedData = employeeList.filter(v => id !== v.id);
+        setEmployeeList(updatedData)
+      })
+      .catch(err => alert(err))
   }
 
   const handleEdit = (id) => {
@@ -42,18 +43,19 @@ const Dashboard = () => {
     setModalVisible(true)
   }
 
-  const getData = () => {
-    request.get('/product')
-    .then(({data}) => {
-      console.log(data, data)
-      setData(data.data)
-    })
-    .catch(err => alert(err))
-  }
 
   const handleLogout = () => {
-    localStorage.removeItem('acces_token');
+    localStorage.removeItem('access_token');
     window.location = '/'
+  }
+
+  const getData = async () => {
+    await request.get('/employee')
+    .then((res) => {
+      const { data } = res.data
+      setEmployeeList(data)
+    })
+    .catch(err => alert(err))
   }
 
   useEffect(() => {
@@ -61,34 +63,37 @@ const Dashboard = () => {
   }, [])
 
   return (
-    <div className="dashboard-container">
-      <h1> PRODUCT LIST </h1>
+    <div className="dashboard-container" style={{margin: "0px 250px"}}>
+      <h1> Employee List </h1>
       <br />
-      <Button color="primary" onClick={() => handleCreate()} > Add Data + </Button>
-      <br />
-      <Button color="danger" onClick={() => handleLogout()} >  Logout </Button>
+      <Row>
+        <Col>
+          <Button color="primary" onClick={() => handleCreate()} > Add Data + </Button>
+          &nbsp;
+          <Button color="danger" onClick={() => handleLogout()} >  Logout </Button>
+        </Col>
+      </Row>
       <br />  <br />
-      <Table>
+      <Table width={250}>
         <thead>
           <tr>
-            {header.map((header, idx) => (
-              <th key={idx}>{header} </th>
-            ))}
+            <th>No</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Action </th>
           </tr>
         </thead>
         <tbody>
-          {data.map((row, idx) => (
+          {employeeList.map((row, idx) => (
             <tr key={idx}>
               <th scope="row">
                 {idx + 1}
               </th>
               <td>{row.name}</td>
-              <td>{row.description}</td>
-              <td>{row.price}</td>
-              <td>{row.stock}</td>
+              <td>{row.age}</td>
               <td>
                 <Button onClick={() => handleEdit(row.id)} > Edit</Button>
-                  &nbsp;&nbsp;
+                &nbsp;&nbsp;
                 <Button color="danger" onClick={() => handleDelete(row.id)} > Delete</Button>
               </td>
             </tr>
@@ -104,7 +109,7 @@ const Dashboard = () => {
         children={
           <Form
             action={actionForm}
-            data={data}
+            data={employeeList}
             setModalVisible={setModalVisible}
             updateId={updateId}
           />

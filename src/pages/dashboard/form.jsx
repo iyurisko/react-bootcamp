@@ -8,31 +8,27 @@ import {
   Label,
   Form
 } from 'reactstrap';
-import axios from 'axios';
-
-const productApiURL = process.env.REACT_APP_PRODUCT_API_URL;
+import request from '../../request';
 
 const FormInput = ({ action, data, setModalVisible, updateId }) => {
 
   const initialFormValue = {
     name: "",
-    description: "",
-    price: 0,
-    stock: 0,
+    age: 0,
   }
 
   const [form, setForm] = useState(initialFormValue);
   const createData = async () => {
-    await axios.post(productApiURL, form)
-      .then(() => {
-        data.push(form);
+    await request.post(`/employee`, form)
+      .then((res) => {
+        data.push(res.data.data);        
       })
       .catch(err => alert(err))
     setModalVisible(false);
   };
 
   const updatedData = async () => {
-    await axios.put(`${productApiURL}/${updateId}`, form)
+    await request.put(`/employee/${updateId}`, form)
       .then(() => {
         const index = data.findIndex((p) => p.id === updateId)
         data[index] = form
@@ -60,21 +56,30 @@ const FormInput = ({ action, data, setModalVisible, updateId }) => {
       <Row>
         <Form onSubmit={handleSubmit}>
           <>
-            {Object.keys(form).map((key, idx) => (
-              <FormGroup key={idx}>
-                <Label>{key}</Label>
-                <Input
-                  type={key === "name" || key === "description" ? "text" : "number"}
-                  value={form[key]}
-                  placeholder={key}
-                  onChange={(e) => setForm(prev => ({
-                    ...prev,
-                    [key]: e.target.value
-                  }))}
-                  required
-                />
-              </FormGroup>
-            ))}
+            <FormGroup>
+              <Label>Name</Label>
+              <Input
+                type="text"
+                value={form.name}
+                placeholder="please enter name"
+                onChange={(e) => setForm(prev =>
+                  ({ ...prev, name: e.target.value })
+                )}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Age</Label>
+              <Input
+                type="number"
+                value={form.age}
+                placeholder="Enter Age"
+                onChange={(e) => setForm(prev =>
+                  ({ ...prev, age: e.target.value })
+                )}
+                required
+              />
+            </FormGroup>
           </>
           <Row>
             <Col>
