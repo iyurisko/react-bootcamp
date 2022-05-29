@@ -1,10 +1,11 @@
 import { React } from 'react'
-import { Button, FormFeedback, Input, Label } from 'reactstrap'
+// import {  Input, Label } from 'reactstrap'
+import { Button, Form, FormFeedback, Input, Label } from 'reactstrap'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import axios from 'axios'
 import { Navigate } from 'react-router-dom'
-import './style.scss'
+import './style.css'
 
 const validationSchema = yup.object().shape({
   email: yup.string().email().required("Email salah"),
@@ -23,11 +24,6 @@ const Login = () => {
     onSubmit: () => handleLogin()
   });
 
-
-  if (isAuth) return <Navigate to="/dashboard" />;
-
-
-
   const handleLogin = async (e) => {
     const data = formik.values
     await axios.post(`http://localhost:7777/login`, data)
@@ -38,14 +34,13 @@ const Login = () => {
       .catch(err => console.error(err))
   }
 
-
+  if (isAuth) return <Navigate to="/dashboard" />;
 
   return (
     <div className="login_page">
-      <form className="form-container" onSubmit={formik.handleSubmit}>
+      <Form className="form-container" onSubmit={formik.handleSubmit}>
         <h1 className="title" >Login</h1>
         <p className="desc"> Welcome back to Mydashboard</p>
-
         <div className="row-input">
           <Label>Email </Label>
           <Input
@@ -61,6 +56,7 @@ const Login = () => {
             <FormFeedback className="error-feedback">{formik.errors.email}</FormFeedback>
           }
         </div>
+        <br />
         <div className="row-input">
           <Label>Password</Label>
           <Input
@@ -77,14 +73,14 @@ const Login = () => {
             <FormFeedback className="error-feedback">{formik.errors.password}</FormFeedback>
           }
         </div>
-
+        <br />
         <Button className="btn-submit" type="submit">
           Login
         </Button>
         <p className="signup">
           {/* Don't have account <a href='/register'> Signup Now </a> */}
         </p>
-      </form>
+      </Form>
     </div >
   )
 }

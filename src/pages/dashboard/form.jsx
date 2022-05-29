@@ -10,7 +10,7 @@ import {
 } from 'reactstrap';
 import request from '../../request';
 
-const FormInput = ({ action, data, setModalVisible, updateId }) => {
+const FormInput = ({ formType, fetchData, setModalVisible, editedData }) => {
 
   const initialFormValue = {
     name: "",
@@ -18,38 +18,41 @@ const FormInput = ({ action, data, setModalVisible, updateId }) => {
   }
 
   const [form, setForm] = useState(initialFormValue);
+
   const createData = async () => {
+
     await request.post(`/employee`, form)
-      .then((res) => {
-        data.push(res.data.data);        
-      })
+      .then(() => fetchData())
       .catch(err => alert(err))
+
     setModalVisible(false);
   };
 
   const updatedData = async () => {
-    await request.put(`/employee/${updateId}`, form)
-      .then(() => {
-        const index = data.findIndex((p) => p.id === updateId)
-        data[index] = form
-      })
+
+    await request.put(`/employee/${editedData.id}`, form)
+      .then(() => fetchData())
       .catch(err => alert(err))
+
     setModalVisible(false);
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (action === "create") return createData()
-    return updatedData()
+
+    if (formType === "create") {
+      createData()
+    } else {
+      updatedData()
+    }
+
   }
 
   useEffect(() => {
-    if (action === "edit") {
-      const editData = Object.assign({}, data.find(v => v.id === updateId))
-      delete editData.id
-      setForm(editData)
+    if (formType === "edit") {
+      setForm(editedData)
     }
-  }, [data, action, updateId])
+  }, [editedData, formType])
 
   return (
     <>

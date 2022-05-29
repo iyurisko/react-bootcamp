@@ -8,6 +8,7 @@ import {
   BrowserRouter,
   Outlet
 } from 'react-router-dom'
+import Header from './component/Header';
 
 function RequireAuth() {
   let auth = localStorage.getItem('access_token');
@@ -20,7 +21,12 @@ function RequireAuth() {
   }
 
   //Renders child route's element, jika ada.
-  return <Outlet />;
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  )
 }
 
 function App() {

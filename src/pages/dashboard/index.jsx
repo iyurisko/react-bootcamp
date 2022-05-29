@@ -6,71 +6,58 @@ import {
   Button,
   Row,
   Table,
-  Col
+  Col,
+  Modal,
+  ModalHeader,
+  ModalBody
 } from 'reactstrap';
-import Modal from "../../component/Modal";
 import Form from "./form";
 import request from "../../request";
 
-const productApiURL = process.env.REACT_APP_PRODUCT_API_URL;
-
 const Dashboard = () => {
-
   const [employeeList, setEmployeeList] = useState([]);
-  const [actionForm, setActionForm] = useState(null);
+  const [formType, setFormType] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [updateId, setUpdateId] = useState(null);
-
-  const header = ['No', 'Name', 'Age', 'Action']
+  const [editedData, setEditedData] = useState({});
 
   const handleCreate = () => {
-    setActionForm("create");
+    setFormType("create");
     setModalVisible(true);
   }
 
   const handleDelete = (id) => {
     request.delete(`/employee/${id}`)
+      .then(() => fetchData())
+      .catch(err => alert(err))
+  }
+
+  const handleEdit = (editedData) => {
+    setEditedData(editedData);
+    setFormType("edit");
+    setModalVisible(true);
+  }
+
+
+  const fetchData = async () => {
+    await request.get('/employee')
       .then((res) => {
-        const updatedData = employeeList.filter(v => id !== v.id);
-        setEmployeeList(updatedData)
+        const { data } = res.data
+        setEmployeeList(data)
       })
       .catch(err => alert(err))
   }
 
-  const handleEdit = (id) => {
-    setUpdateId(id)
-    setActionForm("edit")
-    setModalVisible(true)
-  }
-
-
-  const handleLogout = () => {
-    localStorage.removeItem('access_token');
-    window.location = '/'
-  }
-
-  const getData = async () => {
-    await request.get('/employee')
-    .then((res) => {
-      const { data } = res.data
-      setEmployeeList(data)
-    })
-    .catch(err => alert(err))
-  }
-
   useEffect(() => {
-    getData()
+    fetchData();
   }, [])
 
   return (
-    <div className="dashboard-container" style={{margin: "0px 250px"}}>
+    <div className="dashboard-container" style={{ margin: "0px 250px" }}>
       <h1> Employee List </h1>
       <br />
       <Row>
         <Col>
           <Button color="primary" onClick={() => handleCreate()} > Add Data + </Button>
-          &nbsp;
-          <Button color="danger" onClick={() => handleLogout()} >  Logout </Button>
         </Col>
       </Row>
       <br />  <br />
@@ -92,7 +79,7 @@ const Dashboard = () => {
               <td>{row.name}</td>
               <td>{row.age}</td>
               <td>
-                <Button onClick={() => handleEdit(row.id)} > Edit</Button>
+                <Button onClick={() => handleEdit(row)} > Edit</Button>
                 &nbsp;&nbsp;
                 <Button color="danger" onClick={() => handleDelete(row.id)} > Delete</Button>
               </td>
@@ -102,19 +89,21 @@ const Dashboard = () => {
       </Table>
 
       {/* Modal Form */}
+
       <Modal
-        title={`Form ${actionForm} Data`}
         isOpen={modalVisible}
-        setOpen={setModalVisible}
-        children={
+        toggle={() => setModalVisible(!modalVisible)}
+      >
+        <ModalHeader>{`Form ${formType} Data`}</ModalHeader>
+        <ModalBody>
           <Form
-            action={actionForm}
-            data={employeeList}
+            formType={formType}
+            fetchData={fetchData}
             setModalVisible={setModalVisible}
-            updateId={updateId}
+            editedData={editedData}
           />
-        }
-      />
+        </ModalBody>
+      </Modal>
     </div>
   )
 }

@@ -1,0 +1,87 @@
+:root {
+  --main-color: #4b4988;
+  --second-color: #35326d;
+  --third-color: #934085;
+}
+
+.login_page {
+
+  color: var(--main-color);
+  text-align: center;
+
+  background-image: url('https://wallpaperaccess.com/full/5143159.jpg');
+  /* Full height */
+  height: 100vh;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 0 20px;
+  overflow: hidden;
+}
+
+form {
+  margin: 150px auto;
+  padding: 50px 20px;
+  border-radius: 10px;
+  max-width: 350px;
+  background-color: white;
+
+
+}
+
+.title {
+  font-size: clamp(1.1rem, 1vw + 2.5rem, 3rem);
+  margin-bottom: 10px;
+}
+
+.desc {
+  font-size: clamp(0.5rem, 1vw + 0.6rem, 0.8rem);
+}
+
+.row-input {
+  margin: 0px ;
+  height: 90px;
+  text-align: left;
+}
+
+input[type="text"].form-control,
+input[type="password"].form-control 
+{
+  border: none;
+  border-radius: 0px;
+  border-bottom: 1px solid var(--main-color);
+  background-color: white;
+  color:  solid var(--third-color);
+
+}
+
+input[type="text"].form-control:focus,
+input[type="password"].form-control {
+  box-shadow: none;
+}
+
+.invalid-feedback {
+  font-size: 10px;
+}
+
+.btn-submit {
+  margin: 15px 0px;
+  width: 100%;
+  border-radius: 25px;
+  text-align: center !important;
+  background-image: linear-gradient(to right, var(--second-color), var(--main-color), var(--third-color));
+}
+
+.btn-secondary:focus {
+  box-shadow: none !important;
+}
+
+.signup {
+  font-size: 12px;
+}
+
+.signup, a {
+  color:  var(--third-color);
+}
