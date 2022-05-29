@@ -11,63 +11,48 @@ import {
 import request from '../../request';
 
 const FormInput = ({ formType, fetchData, setModalVisible, editedData }) => {
+  
+  const [name, setName] = useState("")
+  const [age, setAge] = useState(0);
 
-  const initialFormValue = {
-    name: "",
-    age: 0,
-  }
-
-  const [form, setForm] = useState(initialFormValue);
-
-  const createData = async () => {
-
-    await request.post(`/employee`, form)
-      .then(() => fetchData())
-      .catch(err => alert(err))
-
-    setModalVisible(false);
-  };
-
-  const updatedData = async () => {
-
-    await request.put(`/employee/${editedData.id}`, form)
-      .then(() => fetchData())
-      .catch(err => alert(err))
-
-    setModalVisible(false);
-  }
-
-  const handleSubmit = async (e) => {
+  const handleSubmitForm = async (e) => {
     e.preventDefault();
 
-    if (formType === "create") {
-      createData()
+    const form = { name, age };
+
+    if (formType === 'create') {
+      await request.post(`/employee`, form)
+        .then(() => fetchData())
+        .catch(err => alert(err))
+
     } else {
-      updatedData()
+      await request.put(`/employee/${editedData.id}`, form)
+        .then(() => fetchData())
+        .catch(err => alert(err))
     }
 
+    setModalVisible(false);
   }
 
   useEffect(() => {
     if (formType === "edit") {
-      setForm(editedData)
+      setName(editedData.name)
+      setAge(editedData.age)
     }
   }, [editedData, formType])
 
   return (
     <>
       <Row>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmitForm}>
           <>
             <FormGroup>
               <Label>Name</Label>
               <Input
                 type="text"
-                value={form.name}
+                value={name}
                 placeholder="please enter name"
-                onChange={(e) => setForm(prev =>
-                  ({ ...prev, name: e.target.value })
-                )}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </FormGroup>
@@ -75,11 +60,9 @@ const FormInput = ({ formType, fetchData, setModalVisible, editedData }) => {
               <Label>Age</Label>
               <Input
                 type="number"
-                value={form.age}
+                value={age}
                 placeholder="Enter Age"
-                onChange={(e) => setForm(prev =>
-                  ({ ...prev, age: e.target.value })
-                )}
+                onChange={(e) => setAge(e.target.value)}
                 required
               />
             </FormGroup>

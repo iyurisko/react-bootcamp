@@ -21,14 +21,12 @@
   overflow: hidden;
 }
 
-form {
+.form-container {
   margin: 150px auto;
   padding: 50px 20px;
   border-radius: 10px;
   max-width: 350px;
   background-color: white;
-
-
 }
 
 .title {
@@ -46,9 +44,7 @@ form {
   text-align: left;
 }
 
-input[type="text"].form-control,
-input[type="password"].form-control 
-{
+input[type].form-control {
   border: none;
   border-radius: 0px;
   border-bottom: 1px solid var(--main-color);
@@ -57,8 +53,7 @@ input[type="password"].form-control
 
 }
 
-input[type="text"].form-control:focus,
-input[type="password"].form-control {
+input[type].form-control:focus{
   box-shadow: none;
 }
 

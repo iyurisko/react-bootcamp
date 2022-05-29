@@ -4,7 +4,6 @@ const accessToken = localStorage.getItem('access_token');
 
 const request = axios.create({
   baseURL: process.env.REACT_APP_API || 'http://localhost:7777',
-  withCredentials: true,
   headers: {
     'authorization': accessToken
   }
@@ -13,7 +12,7 @@ const request = axios.create({
 request.interceptors.response.use(
   (res ) => res, 
   (err) => {
-
+    console.log(err)
     if (err.response?.status === 403) {
       localStorage.removeItem('access_token')
       window.location.href = "/"

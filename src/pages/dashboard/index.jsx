@@ -1,6 +1,7 @@
 import {
   useState,
-  useEffect
+  useEffect,
+  useCallback
 } from "react";
 import {
   Button,
@@ -38,14 +39,14 @@ const Dashboard = () => {
   }
 
 
-  const fetchData = async () => {
+  const fetchData = useCallback(  async() => {
     await request.get('/employee')
       .then((res) => {
         const { data } = res.data
         setEmployeeList(data)
       })
       .catch(err => alert(err))
-  }
+  },[])
 
   useEffect(() => {
     fetchData();
@@ -61,10 +62,11 @@ const Dashboard = () => {
         </Col>
       </Row>
       <br />  <br />
-      <Table width={250}>
+      <Table striped width={200}>
         <thead>
           <tr>
             <th>No</th>
+            <th>Employee ID</th>
             <th>Name</th>
             <th>Age</th>
             <th>Action </th>
@@ -76,6 +78,7 @@ const Dashboard = () => {
               <th scope="row">
                 {idx + 1}
               </th>
+              <td>{row.id}</td>
               <td>{row.name}</td>
               <td>{row.age}</td>
               <td>
@@ -94,7 +97,7 @@ const Dashboard = () => {
         isOpen={modalVisible}
         toggle={() => setModalVisible(!modalVisible)}
       >
-        <ModalHeader>{`Form ${formType} Data`}</ModalHeader>
+        <ModalHeader>{`Form ${formType} data`}</ModalHeader>
         <ModalBody>
           <Form
             formType={formType}
