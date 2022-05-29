@@ -10,8 +10,8 @@ Welcome to React-Bootcamp
 - [Development](#wrench-development)
   - [Pre-Requisites](#notebook-pre-requisites)
   - [File Structure](#file_folder-file-structure)
-- [Community](#cherry_blossom-community)
-  - [Branches](#cactus-branches)
+- [Backend](#gear-backend)
+- [Branches](#cactus-branches)
 - [Resources](#page_facing_up-resources)
 
 ##  :beginner: About
@@ -19,7 +19,6 @@ This is  a project for handons material on React.js, including:
 * React-Hooks
 * Basic CRUD system
 * Form using formik
-* Fake server using json-server
 
 ## :zap: Usage
 This is a great source to learn React.js
@@ -27,15 +26,15 @@ This is a great source to learn React.js
 ###  :electric_plug: Installation
 - Clone this repository.
 - Install node modules
-```
-$ npm install.
-```
+- run npm install.
+
 
 ###  :package: Commands
 - To run this project 
-```
-$ npm start.
-```
+
+  ```
+  $ npm start.
+  ```
 
 ##  :wrench: Development
 
@@ -47,53 +46,56 @@ $ npm start.
 ```
 SRC
 ├── component
-|     └──modal.jsx 
+|     | 
+|     ├── Header
+│     │   ├── index.jsx
+│     │   └── styles.css
+│     │
+|     └── Modal
+│         ├── index.jsx
+│         └── styles.css
+│ 
 ├── pages
-|     ├── auth
-│     |   ├── index.jsx
-│     |   ├── login.jsx
-│     │   └── register.jsx
-|     ├── catalog
-│     |   ├── byId.jsx
-│     │   └── index.jsx
-|     └── dashboard
-│         ├── form.jsx
-│         └── index.jsx
-├── styles
-|     ├── component
-|     └── pages
-│     |   ├──  auth.scss
-│     |   └──  catalog.jsx
 │     |   
-│     └── index.scss
+|     ├── Dashboard
+│     |   ├── form.jsx
+│     |   └── index.jsx
+│     │ 
+|     ├── Login
+│     │   ├── index.jsx
+│     │   └── styles.css
+│     │
+|     ├── NotFound
+│     │   └── index.jsx
+│     │
+|     └── Register
+│         └── index.jsx
+│ 
 ├── App.jsx
 ├── index.css
 ├── index.js
-├── env
-├── db.json
-├── package.json
-└── README.md
+└── request.js
 ```
 
+### :gear: Backend
 
- ### :cactus: Branches
+```
+source: https://github.com/iyurisko/fake-rest-api-services
+```
 
-1. **`react-hook`** is for hooks learning branch.
+### :cactus: Branches
 
-2. **`basic-crud`** is the very simple crud branch.
+1. **`Main`** Main branch.
 
-3. **`formik`** integrated formik on auth pages branch.
+2. **`react-hook`** is for hooks learning branch.
 
-4. **`json-server`** integrated axios &  json-server & json-server-auth for consume api crud branch.
+3. **`basic-crud`** is the very simple crud branch.
 
+4. **`formik`** integrated formik on auth pages branch.
 
 ##  :page_facing_up: Resources
 
 - axios: https://axios-http.com/docs/api_intro
 - formik : https://formik.org/docs/overview
-- json-server  : https://github.com/typicode/json-server
-- json-server-auth : https://github.com/jeremyben/json-server-auth/
-- react router dom : https://reactrouter.com/docs/en/v6/getting-started/overview
 - reactrap: reactstrap.github.io
-- sass: https://sass-lang.com/
 - yup : https://github.com/jquense/yup
