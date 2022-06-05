@@ -22,8 +22,8 @@
 }
 
 .form-container {
-  margin: 150px auto;
-  padding: 50px 20px;
+  margin: 150px auto ;
+  padding: 50px 20px 10px;
   border-radius: 10px;
   max-width: 350px;
   background-color: white;
@@ -57,12 +57,12 @@ input[type].form-control:focus{
   box-shadow: none;
 }
 
-.invalid-feedback {
+.row-input .invalid-feedback{
   font-size: 10px;
 }
 
 .btn-submit {
-  margin: 15px 0px;
+  margin: 0px 0px 15px 0px;
   width: 100%;
   border-radius: 25px;
   text-align: center !important;
