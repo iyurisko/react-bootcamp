@@ -1,8 +1,7 @@
 import {
   useState,
   useEffect,
-  useCallback
-} from "react";
+  } from "react";
 import {
   Button,
   Row,
@@ -39,14 +38,13 @@ const Dashboard = () => {
   }
 
 
-  const fetchData = useCallback(  async() => {
+  const fetchData = async () => {
     await request.get('/employee')
-      .then((res) => {
-        const { data } = res.data
+      .then(({ data }) => {
         setEmployeeList(data)
       })
       .catch(err => alert(err))
-  },[])
+  }
 
   useEffect(() => {
     fetchData();

@@ -1,6 +1,6 @@
 import LoginPages from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import NotFound from './pages/NotFound';
+import Dashboard from './pages/dashboard';
+import NotFound from './pages/notFound';
 import {
   Routes,
   Route,

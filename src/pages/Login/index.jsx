@@ -28,9 +28,11 @@ const Login = () => {
     await axios.post(`http://localhost:7777/login`, data)
       .then(res => {
         localStorage.setItem('access_token', res.data.token)
-        window.location = '/dashboard'
+
       })
       .catch(err => console.error(err))
+
+    window.location.href = '/dashboard'
   }
 
   if (isAuth) return <Navigate to="/dashboard" />;

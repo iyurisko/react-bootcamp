@@ -10,7 +10,7 @@ const request = axios.create({
 });
 
 request.interceptors.response.use(
-  (res ) => res, 
+  (res ) => res.data, 
   (err) => {
     console.log(err)
     if (err.response?.status === 403) {
