@@ -17,12 +17,12 @@ import request from "../../request";
 const Dashboard = () => {
   const [employeeList, setEmployeeList] = useState([]);
   const [formType, setFormType] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [editedData, setEditedData] = useState({});
+  const [formVisible, setFormVisible] = useState(false);
+  const [formEdited, setFormEdited] = useState({});
 
   const handleCreate = () => {
     setFormType("create");
-    setModalVisible(true);
+    setFormVisible(true);
   }
 
   const handleDelete = (id) => {
@@ -31,10 +31,10 @@ const Dashboard = () => {
       .catch(err => alert(err))
   }
 
-  const handleEdit = (editedData) => {
-    setEditedData(editedData);
+  const handleEdit = (form) => {
+    setFormEdited(form);
     setFormType("edit");
-    setModalVisible(true);
+    setFormVisible(true);
   }
 
 
@@ -49,6 +49,7 @@ const Dashboard = () => {
   useEffect(() => {
     fetchData();
   }, [])
+
 
   return (
     <div className="dashboard-container" style={{ margin: "0px 250px" }}>
@@ -92,16 +93,16 @@ const Dashboard = () => {
       {/* Modal Form */}
 
       <Modal
-        isOpen={modalVisible}
-        toggle={() => setModalVisible(!modalVisible)}
+        isOpen={formVisible}
+        toggle={() => setFormVisible(!formVisible)}
       >
         <ModalHeader>{`Form ${formType} data`}</ModalHeader>
         <ModalBody>
           <Form
-            formType={formType}
-            fetchData={fetchData}
-            setModalVisible={setModalVisible}
-            editedData={editedData}
+            type={formType}
+            refetch={fetchData}
+            setVisible={setFormVisible}
+            formEdited={formEdited}
           />
         </ModalBody>
       </Modal>

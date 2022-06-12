@@ -5,10 +5,9 @@ import './styles.css'
 const Header = () => {
 
   const handleLogout = () => {
-    localStorage.removeItem('access_token');
+    sessionStorage.removeItem('access_token');
     window.location = '/'
   }
-
 
   return (
     <div className="header">

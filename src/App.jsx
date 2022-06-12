@@ -9,9 +9,10 @@ import {
   Outlet
 } from 'react-router-dom'
 import Header from './component/Header';
+import RegisterPage from './pages/Register';
 
 function RequireAuth() {
-  let auth = localStorage.getItem('access_token');
+  let auth = sessionStorage.getItem('access_token');
 
   if (!auth) {
     // cek auth logged ada atau tidak
@@ -40,7 +41,7 @@ function App() {
           */}
           <Route>
             <Route path="/" element={<LoginPages />} />
-            <Route path="/register" element={<LoginPages />} />
+            <Route path="/register" element={<RegisterPage/>} />
 
             {/* PRIVATE ROUTES
           Pages yang hanya bisa di akses oleh user yang terotentikasi

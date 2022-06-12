@@ -10,7 +10,7 @@ import {
 } from 'reactstrap';
 import request from '../../request';
 
-const FormInput = ({ formType, fetchData, setModalVisible, editedData }) => {
+const FormInput = ({ type, refetch, setVisible, formEdited }) => {
   
   const [name, setName] = useState("")
   const [age, setAge] = useState(0);
@@ -20,26 +20,26 @@ const FormInput = ({ formType, fetchData, setModalVisible, editedData }) => {
 
     const form = { name, age };
 
-    if (formType === 'create') {
+    if (type === 'create') {
       await request.post(`/employee`, form)
-        .then(() => fetchData())
+        .then(() => refetch())
         .catch(err => alert(err))
 
     } else {
-      await request.put(`/employee/${editedData.id}`, form)
-        .then(() => fetchData())
+      await request.put(`/employee/${formEdited.id}`, form)
+        .then(() => refetch())
         .catch(err => alert(err))
     }
 
-    setModalVisible(false);
+    setVisible(false);
   }
 
   useEffect(() => {
-    if (formType === "edit") {
-      setName(editedData.name)
-      setAge(editedData.age)
+    if (type === "edit") {
+      setName(formEdited.name)
+      setAge(formEdited.age)
     }
-  }, [editedData, formType])
+  }, [formEdited, type])
 
   return (
     <>
@@ -72,7 +72,7 @@ const FormInput = ({ formType, fetchData, setModalVisible, editedData }) => {
               <Button color="primary" type="submit"> Submit</Button>
             </Col>
             <Col>
-              <Button onClick={() => setModalVisible(false)} > Cancel </Button>
+              <Button onClick={() => setVisible(false)} > Cancel </Button>
             </Col>
           </Row>
         </Form>

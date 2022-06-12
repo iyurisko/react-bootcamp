@@ -2,9 +2,9 @@ import { React } from 'react'
 import { Button, Form, FormFeedback, Input, Label } from 'reactstrap'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import axios from 'axios'
 import { Navigate } from 'react-router-dom'
 import './style.css'
+import request from '../../request'
 
 const validationSchema = yup.object().shape({
   email: yup.string().email().required("Email salah"),
@@ -12,8 +12,7 @@ const validationSchema = yup.object().shape({
 });
 
 const Login = () => {
-
-  const isAuth = localStorage.getItem('access_token')
+  const isAuth = sessionStorage.getItem('access_token')
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -23,16 +22,13 @@ const Login = () => {
     onSubmit: () => handleLogin()
   });
 
-  const handleLogin = async (e) => {
-    const data = formik.values
-    await axios.post(`http://localhost:7777/login`, data)
-      .then(res => {
-        localStorage.setItem('access_token', res.data.token)
-
+  const handleLogin = async () => {
+    const form = formik.values
+    await request.post(`http://localhost:7777/login`, form)
+      .then(({ token }) => {
+        sessionStorage.setItem('access_token', token)
       })
       .catch(err => console.error(err))
-
-    window.location.href = '/dashboard'
   }
 
   if (isAuth) return <Navigate to="/dashboard" />;
